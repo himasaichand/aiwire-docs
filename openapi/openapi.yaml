@@ -1,0 +1,861 @@
+openapi: 3.1.0
+info:
+  title: AIWire Platform API
+  version: 1.0.0
+  description: |
+    B2B API for AI-powered hiring. Resume PDFs into structured profiles,
+    job descriptions into scoring rubrics, candidate × job matches with
+    evidence. Every authenticated call is billed and tracked
+    (see GET /v1/usage/summary).
+
+    **Base URL (production):** https://aiwire-api.aiwire.workers.dev
+
+    **Auth:** `Authorization: Bearer sk_live_<your-key>` on every /v1/* call.
+    Your key resolves to a workspace; all resources are scoped to that workspace.
+
+    **Errors:** RFC 7807 Problem Details with `Aiwire-Request-Id` header on
+    every response (success or failure). Include the request ID in support
+    emails.
+
+    **Rate limit:** 100 requests / minute per key. Hit a 429? Wait the
+    `Retry-After` seconds.
+  contact:
+    name: AIWire Platform Support
+    email: chandugopisetty123@gmail.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: https://aiwire-api.aiwire.workers.dev
+    description: Production
+  - url: http://localhost:8787
+    description: Local development
+
+tags:
+  - name: Health
+    description: Liveness checks
+  - name: Resumes
+    description: Parse resume PDFs into a 30-field structured profile
+  - name: Candidates
+    description: Persistent person records keyed by your external_id
+  - name: Jobs
+    description: Job descriptions and AI-generated rubrics
+  - name: Applications
+    description: Candidate↔job pairings with optional match scores
+  - name: Usage
+    description: Your own usage, costs, and per-request audit log
+
+security:
+  - SecretKey: []
+
+paths:
+  /health:
+    get:
+      tags: [Health]
+      summary: Liveness probe
+      operationId: getHealth
+      security: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status, version, environment, timestamp]
+                properties:
+                  status: { type: string, enum: [ok] }
+                  version: { type: string }
+                  environment: { type: string, enum: [development, staging, production] }
+                  timestamp: { type: string, format: date-time }
+
+  # ─── Resumes ───────────────────────────────────────────────────────────
+  /v1/resumes/parse:
+    post:
+      tags: [Resumes]
+      summary: Parse a resume PDF into a structured Profile
+      operationId: parseResume
+      description: |
+        Claude Haiku 4.5 vision-on-PDF. ~10-20 sec; ~$0.012 per call.
+        Returns 30 structured fields including AI/ML signals, ATS score,
+        India-aware institution tier, and extractive evidence quotes
+        for load-bearing numerics.
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/ParseResumeUrlInput"
+                - $ref: "#/components/schemas/ParseResumeBase64Input"
+      responses:
+        "200":
+          description: Parsed Profile
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ParseResumeResponse" }
+        "400": { $ref: "#/components/responses/BadRequest" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+        "422": { $ref: "#/components/responses/Unprocessable" }
+        "429": { $ref: "#/components/responses/RateLimited" }
+        "502": { $ref: "#/components/responses/AIFailed" }
+        "503": { $ref: "#/components/responses/ServiceUnavailable" }
+
+  # ─── Candidates ────────────────────────────────────────────────────────
+  /v1/candidates:
+    post:
+      tags: [Candidates]
+      summary: Upsert a candidate by external_id
+      operationId: upsertCandidate
+      description: |
+        Idempotent on (workspace_id, external_id). Pass `profile` directly
+        OR run /v1/resumes/parse first and pass the returned `profile` here.
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UpsertCandidateInput" }
+      responses:
+        "200":
+          description: Upserted Candidate
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Candidate" }
+        "400": { $ref: "#/components/responses/BadRequest" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+    get:
+      tags: [Candidates]
+      summary: List candidates (cursor-paginated)
+      operationId: listCandidates
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200":
+          description: Page of Candidates
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items, has_more]
+                properties:
+                  items:
+                    type: array
+                    items: { $ref: "#/components/schemas/Candidate" }
+                  next_cursor: { type: string, nullable: true }
+                  has_more: { type: boolean }
+
+  /v1/candidates/{id}:
+    get:
+      tags: [Candidates]
+      summary: Get a candidate by id
+      operationId: getCandidate
+      parameters:
+        - $ref: "#/components/parameters/CandidateId"
+      responses:
+        "200":
+          description: Candidate
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Candidate" }
+        "404": { $ref: "#/components/responses/NotFound" }
+
+  # ─── Jobs ──────────────────────────────────────────────────────────────
+  /v1/jobs:
+    post:
+      tags: [Jobs]
+      summary: Upsert a job (auto-generates rubric if absent)
+      operationId: upsertJob
+      description: |
+        If `rubric` is omitted, we synthesize a 5-competency rubric from
+        the job description (Claude Haiku 4.5; ~3-5 sec; ~$0.005).
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UpsertJobInput" }
+      responses:
+        "200":
+          description: Upserted Job
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Job" }
+    get:
+      tags: [Jobs]
+      summary: List jobs (cursor-paginated)
+      operationId: listJobs
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200":
+          description: Page of Jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items, has_more]
+                properties:
+                  items:
+                    type: array
+                    items: { $ref: "#/components/schemas/Job" }
+                  next_cursor: { type: string, nullable: true }
+                  has_more: { type: boolean }
+
+  /v1/jobs/{id}:
+    get:
+      tags: [Jobs]
+      summary: Get a job by id
+      operationId: getJob
+      parameters:
+        - $ref: "#/components/parameters/JobId"
+      responses:
+        "200":
+          description: Job
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Job" }
+        "404": { $ref: "#/components/responses/NotFound" }
+
+  /v1/jobs/{id}/match:
+    post:
+      tags: [Jobs]
+      summary: Score a candidate against this job (5-dim with evidence)
+      operationId: matchJob
+      description: |
+        Returns a 5-dimensional match score (skill_fit, level, location,
+        salary, company_quality) plus a recommendation enum. Every
+        dimension includes ≥1 evidence quote from the candidate profile.
+      parameters:
+        - $ref: "#/components/parameters/JobId"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MatchInput" }
+      responses:
+        "200":
+          description: Match score
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MatchScore" }
+
+  # ─── Applications ──────────────────────────────────────────────────────
+  /v1/applications:
+    post:
+      tags: [Applications]
+      summary: Link a candidate to a job
+      operationId: createApplication
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CreateApplicationInput" }
+      responses:
+        "200":
+          description: Application
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Application" }
+    get:
+      tags: [Applications]
+      summary: List applications (cursor-paginated)
+      operationId: listApplications
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200":
+          description: Page of Applications
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items, has_more]
+                properties:
+                  items:
+                    type: array
+                    items: { $ref: "#/components/schemas/Application" }
+                  next_cursor: { type: string, nullable: true }
+                  has_more: { type: boolean }
+
+  # ─── Usage / observability ─────────────────────────────────────────────
+  /v1/usage/summary:
+    get:
+      tags: [Usage]
+      summary: Aggregated usage over a time window
+      operationId: getUsageSummary
+      description: |
+        Totals + per-endpoint + per-day + per-status-bucket for your
+        workspace. Source of truth: usage_events in our Postgres.
+      parameters:
+        - name: days
+          in: query
+          schema: { type: integer, minimum: 1, maximum: 90, default: 30 }
+      responses:
+        "200":
+          description: Usage summary
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/UsageSummary" }
+
+  /v1/usage/recent:
+    get:
+      tags: [Usage]
+      summary: Last N requests for self-debug
+      operationId: getUsageRecent
+      description: |
+        Per-request log for debugging. Use this when /v1/usage/summary
+        shows errors and you need to find which specific requests failed.
+        Filter `?status=errors` to see only 4xx/5xx, or `?endpoint=parse`
+        to narrow by endpoint substring.
+      parameters:
+        - name: limit
+          in: query
+          schema: { type: integer, minimum: 1, maximum: 200, default: 50 }
+        - name: status
+          in: query
+          schema: { type: string, enum: [all, errors], default: all }
+        - name: endpoint
+          in: query
+          schema: { type: string, maxLength: 100 }
+      responses:
+        "200":
+          description: Recent requests
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/UsageRecent" }
+
+components:
+  securitySchemes:
+    SecretKey:
+      type: http
+      scheme: bearer
+      bearerFormat: sk_live_xxx
+      description: |
+        Live key issued to your workspace. Format: `sk_live_<24+ chars>`.
+        Send as `Authorization: Bearer sk_live_...`.
+
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      schema: { type: string, format: uuid }
+      required: false
+      description: |
+        Set on every write to safely retry. Postgres-authoritative; KV is a
+        60s read cache. Replaying with a different body returns 409
+        idempotency_key_mismatch.
+    CandidateId:
+      name: id
+      in: path
+      required: true
+      schema: { type: string, pattern: "^cand_" }
+    JobId:
+      name: id
+      in: path
+      required: true
+      schema: { type: string, pattern: "^job_" }
+    Limit:
+      name: limit
+      in: query
+      schema: { type: integer, minimum: 1, maximum: 100, default: 50 }
+    Cursor:
+      name: cursor
+      in: query
+      schema: { type: string }
+      description: Opaque cursor from a previous response's `next_cursor`.
+
+  schemas:
+    # ─── Resume / Profile ────────────────────────────────────────────────
+    ParseResumeResponse:
+      type: object
+      required: [id, workspace_id, profile, source]
+      properties:
+        id: { type: string, description: "Transient id (NOT persisted until you /v1/candidates this)" }
+        workspace_id: { type: string, pattern: "^ws_" }
+        profile: { $ref: "#/components/schemas/Profile" }
+        source: { type: string, enum: [claude_vision] }
+        confidence: { $ref: "#/components/schemas/Confidence" }
+
+    Profile:
+      type: object
+      description: |
+        Rich 30-field profile extracted from a resume PDF. Designed for
+        AI/ML hiring with India-aware institution tiering, but works
+        globally. Bias firewall is enforced — no age/gender/caste/marital
+        fields are surfaced. Evidence quotes anchor load-bearing numeric
+        fields for anti-hallucination.
+      required:
+        [name, current_title, skills, years_total, experience, education,
+         ai_ml, ats, summary, strengths, gaps, confidence]
+      properties:
+        # Identity
+        name: { type: string, nullable: true }
+        email: { type: string, format: email, nullable: true }
+        phone: { type: string, nullable: true }
+        city: { type: string, nullable: true }
+        country: { type: string, nullable: true }
+        country_code: { type: string, minLength: 2, maxLength: 2, nullable: true, description: "ISO 3166-1 alpha-2, lowercase (e.g. 'in', 'uk')" }
+        linkedin_url: { type: string, nullable: true }
+        github_url: { type: string, nullable: true }
+        portfolio_url: { type: string, nullable: true }
+        # Title / level
+        current_title: { type: string, nullable: true }
+        target_title: { type: string, nullable: true }
+        experience_level: { type: string, enum: [Junior, Mid, Senior, Lead, Principal, Director], nullable: true }
+        seniority_ladder_position: { type: string, nullable: true }
+        # Skills
+        skills: { type: array, items: { type: string }, maxItems: 20 }
+        skill_clusters: { type: array, items: { type: string } }
+        # Experience + education
+        years_total: { type: number, minimum: 0 }
+        years_total_evidence: { type: string, nullable: true, description: "Quote or short derivation supporting years_total" }
+        experience:
+          type: array
+          items: { $ref: "#/components/schemas/ExperienceItem" }
+        education:
+          type: array
+          items: { $ref: "#/components/schemas/EducationItem" }
+        # Notable
+        certifications: { type: array, items: { type: object } }
+        projects: { type: array, items: { type: object } }
+        publications: { type: array, items: { type: object } }
+        open_source: { type: array, items: { type: object } }
+        awards: { type: array, items: { type: object } }
+        # Compensation (extractive only)
+        compensation: { $ref: "#/components/schemas/Compensation" }
+        # AI/ML signals
+        ai_ml: { $ref: "#/components/schemas/AiMl" }
+        # ATS
+        ats: { $ref: "#/components/schemas/Ats" }
+        # AI verdict
+        summary: { type: string, nullable: true }
+        strengths:
+          type: array
+          items:
+            type: object
+            required: [strength, evidence]
+            properties:
+              strength: { type: string }
+              evidence: { type: string, description: "Quote from the resume that supports this" }
+        gaps:
+          type: array
+          items: { $ref: "#/components/schemas/Gap" }
+        # Provenance
+        confidence: { $ref: "#/components/schemas/Confidence" }
+        low_confidence_reasons: { type: array, items: { type: string } }
+
+    ExperienceItem:
+      type: object
+      required: [title, company]
+      properties:
+        title: { type: string }
+        company: { type: string }
+        start: { type: string, pattern: "^\\d{4}-\\d{2}$", nullable: true }
+        end: { type: string, pattern: "^\\d{4}-\\d{2}$", nullable: true }
+        summary: { type: string }
+        tech_stack: { type: array, items: { type: string } }
+        quantified_achievements: { type: array, items: { type: string } }
+
+    EducationItem:
+      type: object
+      required: [degree, institution]
+      properties:
+        degree: { type: string }
+        institution: { type: string }
+        year: { type: integer, nullable: true }
+        gpa: { type: number, nullable: true }
+        specialization: { type: string, nullable: true }
+        institution_tier:
+          type: string
+          enum: [tier_1, tier_2, tier_3, unranked]
+          description: "India-aware: IIT/IISc/IIIT-H/BITS/IIM-A-B-C = tier_1; NITs/other-IIITs = tier_2"
+
+    Compensation:
+      type: object
+      description: "Extractive only — only filled if explicitly in resume."
+      properties:
+        current_ctc:
+          type: object
+          nullable: true
+          properties:
+            value: { type: number }
+            currency: { type: string }
+            period: { type: string, enum: [annual, monthly, hourly] }
+        expected_ctc:
+          type: object
+          nullable: true
+          properties:
+            value: { type: number }
+            currency: { type: string }
+            period: { type: string, enum: [annual, monthly, hourly] }
+        notice_period_days: { type: integer, minimum: 0, nullable: true }
+        evidence: { type: string, nullable: true }
+
+    AiMl:
+      type: object
+      properties:
+        ai_ml_years: { type: number, minimum: 0, nullable: true }
+        ai_ml_years_evidence: { type: string, nullable: true }
+        domain_specializations:
+          type: array
+          items:
+            type: string
+            enum:
+              ["NLP", "Computer Vision", "Recommendations",
+               "Reinforcement Learning", "MLOps", "GenAI/LLMs",
+               "Speech", "Time Series", "Tabular ML", "Robotics",
+               "Search/Retrieval", "Fraud/Anomaly", "Edge/On-device"]
+        frameworks_proficient: { type: array, items: { type: string } }
+        has_llm_experience: { type: boolean }
+        llm_evidence: { type: array, items: { type: string } }
+
+    Ats:
+      type: object
+      required: [score, breakdown]
+      properties:
+        score: { type: integer, minimum: 0, maximum: 100 }
+        score_rationale: { type: string, nullable: true }
+        breakdown:
+          type: object
+          properties:
+            keywords: { type: integer, minimum: 0, maximum: 100 }
+            structure: { type: integer, minimum: 0, maximum: 100 }
+            action_verbs: { type: integer, minimum: 0, maximum: 100 }
+            quantified_achievements: { type: integer, minimum: 0, maximum: 100 }
+            format: { type: integer, minimum: 0, maximum: 100 }
+        issues:
+          type: array
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+                enum: [keywords, structure, action_verbs, quantified_achievements, format, length, contact_info]
+              issue: { type: string }
+              before: { type: string, nullable: true }
+              after: { type: string, nullable: true }
+
+    Gap:
+      type: object
+      required: [name, severity]
+      properties:
+        name: { type: string }
+        severity: { type: string, enum: [CRITICAL, HIGH, MEDIUM] }
+        market_reason: { type: string, nullable: true }
+        time_to_close: { type: string, nullable: true }
+        resource: { type: string, nullable: true, description: "From curated whitelist only (Coursera, Udemy, Fast.ai, etc.)" }
+        resource_url: { type: string, nullable: true }
+        cost: { type: string, nullable: true }
+
+    Confidence:
+      type: object
+      description: |
+        Per-section self-reported confidence. Treat ordinally — values ≤ 0.6
+        on any section indicate the parser is uncertain there and recommend
+        human review. Do NOT surface as a "73% confident" UI string;
+        RLHF'd models are systematically overconfident.
+      properties:
+        overall: { type: number, minimum: 0, maximum: 1 }
+        identity: { type: number, minimum: 0, maximum: 1 }
+        experience: { type: number, minimum: 0, maximum: 1 }
+        education: { type: number, minimum: 0, maximum: 1 }
+        ats: { type: number, minimum: 0, maximum: 1 }
+        ai_ml: { type: number, minimum: 0, maximum: 1 }
+        compensation: { type: number, minimum: 0, maximum: 1 }
+
+    # ─── Candidates / Jobs / Applications ────────────────────────────────
+    Candidate:
+      type: object
+      required: [id, workspace_id, external_id, created_at]
+      properties:
+        id: { type: string, pattern: "^cand_" }
+        workspace_id: { type: string, pattern: "^ws_" }
+        external_id: { type: string, nullable: true }
+        email: { type: string, format: email, nullable: true }
+        first_name: { type: string, nullable: true }
+        last_name: { type: string, nullable: true }
+        profile: { $ref: "#/components/schemas/Profile" }
+        created_at: { type: string, format: date-time }
+
+    Job:
+      type: object
+      required: [id, workspace_id, title, description, rubric, created_at]
+      properties:
+        id: { type: string, pattern: "^job_" }
+        workspace_id: { type: string, pattern: "^ws_" }
+        external_id: { type: string, nullable: true }
+        title: { type: string }
+        description: { type: string }
+        level: { type: string, nullable: true }
+        location: { type: object, additionalProperties: true, nullable: true }
+        salary: { type: object, additionalProperties: true, nullable: true }
+        rubric: { $ref: "#/components/schemas/Rubric" }
+        created_at: { type: string, format: date-time }
+
+    Rubric:
+      type: object
+      properties:
+        competencies:
+          type: array
+          items:
+            type: object
+            required: [name, weight]
+            properties:
+              name: { type: string }
+              weight: { type: number, minimum: 0, maximum: 1 }
+              must_have: { type: array, items: { type: string } }
+              nice_to_have: { type: array, items: { type: string } }
+
+    Application:
+      type: object
+      required: [id, workspace_id, candidate_id, job_id, stage, status, created_at]
+      properties:
+        id: { type: string, pattern: "^app_" }
+        workspace_id: { type: string, pattern: "^ws_" }
+        candidate_id: { type: string, pattern: "^cand_" }
+        job_id: { type: string, pattern: "^job_" }
+        stage: { type: string, default: applied }
+        status: { type: string, enum: [active, hired, rejected] }
+        match_score:
+          oneOf:
+            - $ref: "#/components/schemas/MatchScore"
+            - { type: "null" }
+        source: { type: string, nullable: true }
+        created_at: { type: string, format: date-time }
+
+    MatchScore:
+      type: object
+      required: [overall, dimensions, recommendation, confidence]
+      properties:
+        overall: { type: number, minimum: 0, maximum: 1 }
+        dimensions:
+          type: object
+          required: [skill_fit, level, location, salary, company_quality]
+          properties:
+            skill_fit: { $ref: "#/components/schemas/MatchDimension" }
+            level: { $ref: "#/components/schemas/MatchDimension" }
+            location: { $ref: "#/components/schemas/MatchDimension" }
+            salary: { $ref: "#/components/schemas/MatchDimension" }
+            company_quality: { $ref: "#/components/schemas/MatchDimension" }
+        recommendation:
+          type: string
+          enum: [strong_yes, yes, mixed, no, strong_no]
+        confidence: { type: number, minimum: 0, maximum: 1 }
+
+    MatchDimension:
+      type: object
+      required: [score, evidence]
+      properties:
+        score: { type: number, minimum: 0, maximum: 1 }
+        evidence:
+          type: array
+          minItems: 1
+          items: { type: string }
+
+    # ─── Inputs ──────────────────────────────────────────────────────────
+    ParseResumeUrlInput:
+      type: object
+      required: [url]
+      properties:
+        url: { type: string, format: uri }
+        external_id: { type: string }
+
+    ParseResumeBase64Input:
+      type: object
+      required: [base64]
+      properties:
+        base64: { type: string }
+        media_type: { type: string, enum: [application/pdf], default: application/pdf }
+        external_id: { type: string }
+
+    UpsertCandidateInput:
+      type: object
+      required: [external_id]
+      properties:
+        external_id: { type: string }
+        email: { type: string, format: email }
+        first_name: { type: string }
+        last_name: { type: string }
+        profile: { type: object, additionalProperties: true }
+
+    UpsertJobInput:
+      type: object
+      required: [external_id, title, description]
+      properties:
+        external_id: { type: string }
+        title: { type: string }
+        description: { type: string }
+        level: { type: string }
+        location: { type: object, additionalProperties: true }
+        salary: { type: object, additionalProperties: true }
+        rubric: { $ref: "#/components/schemas/Rubric" }
+
+    MatchInput:
+      type: object
+      required: [candidate_id]
+      properties:
+        candidate_id: { type: string, pattern: "^cand_" }
+        weights:
+          type: object
+          properties:
+            skill_fit: { type: number }
+            level: { type: number }
+            location: { type: number }
+            salary: { type: number }
+            company_quality: { type: number }
+
+    CreateApplicationInput:
+      type: object
+      required: [candidate_id, job_id]
+      properties:
+        candidate_id: { type: string, pattern: "^cand_" }
+        job_id: { type: string, pattern: "^job_" }
+        source: { type: string }
+
+    # ─── Usage / observability ───────────────────────────────────────────
+    UsageSummary:
+      type: object
+      required: [window_days, workspace_id, totals, by_endpoint, by_day, by_status]
+      properties:
+        window_days: { type: integer }
+        workspace_id: { type: string, pattern: "^ws_" }
+        totals:
+          type: object
+          properties:
+            calls: { type: integer }
+            cost_usd: { type: number }
+            tokens_in: { type: integer }
+            tokens_out: { type: integer }
+            errors: { type: integer }
+            error_rate: { type: number, minimum: 0, maximum: 1 }
+        by_endpoint:
+          type: array
+          items:
+            type: object
+            properties:
+              endpoint: { type: string }
+              calls: { type: integer }
+              cost_usd: { type: number }
+              errors: { type: integer }
+              avg_latency_ms: { type: integer }
+        by_day:
+          type: array
+          items:
+            type: object
+            properties:
+              day: { type: string, format: date }
+              calls: { type: integer }
+              cost_usd: { type: number }
+              errors: { type: integer }
+        by_status:
+          type: array
+          items:
+            type: object
+            properties:
+              bucket: { type: string, enum: ["2xx", "3xx", "4xx", "5xx", unknown] }
+              count: { type: integer }
+
+    UsageRecent:
+      type: object
+      required: [workspace_id, count, items]
+      properties:
+        workspace_id: { type: string }
+        count: { type: integer }
+        filters:
+          type: object
+          properties:
+            status: { type: string }
+            endpoint: { type: string, nullable: true }
+            limit: { type: integer }
+        items:
+          type: array
+          items:
+            type: object
+            required: [timestamp, endpoint, status_code, request_id]
+            properties:
+              timestamp: { type: string, format: date-time }
+              endpoint: { type: string }
+              status_code: { type: integer, nullable: true }
+              latency_ms: { type: integer, nullable: true }
+              cost_usd: { type: number }
+              tokens_in: { type: integer }
+              tokens_out: { type: integer }
+              request_id: { type: string, pattern: "^req_", nullable: true }
+
+    # ─── Errors ──────────────────────────────────────────────────────────
+    Problem:
+      type: object
+      required: [type, title, status, code, request_id]
+      description: RFC 7807 Problem Details. Sent as `application/problem+json`.
+      properties:
+        type: { type: string, format: uri, description: "https://docs.aiwire.dev/errors/<code>" }
+        title: { type: string }
+        status: { type: integer }
+        code: { type: string, description: "Stable machine-readable error code" }
+        detail: { type: string, description: "Human-readable explanation" }
+        instance: { type: string }
+        request_id: { type: string, pattern: "^req_" }
+      additionalProperties: true
+
+  responses:
+    BadRequest:
+      description: Invalid request body or parameters (e.g. malformed JSON, missing required field)
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+    Unauthorized:
+      description: Missing, malformed, or revoked API key
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+    Forbidden:
+      description: Credentials valid but lack required scope
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+    NotFound:
+      description: Resource does not exist or is not in this workspace
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+    Unprocessable:
+      description: Request was syntactically valid but semantically wrong (e.g. unreachable resume URL)
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+    RateLimited:
+      description: Rate limit exceeded (100 req/min/key)
+      headers:
+        Retry-After:
+          schema: { type: integer }
+        RateLimit-Limit:
+          schema: { type: integer }
+        RateLimit-Remaining:
+          schema: { type: integer }
+        RateLimit-Reset:
+          schema: { type: integer, description: "Unix seconds" }
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+    AIFailed:
+      description: Claude returned content that failed Zod validation even after retry
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+    ServiceUnavailable:
+      description: Upstream dependency unavailable (Anthropic, Postgres)
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }

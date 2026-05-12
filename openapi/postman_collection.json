@@ -1,0 +1,2213 @@
+{
+    "item": [
+        {
+            "name": "Health",
+            "description": "Liveness checks",
+            "item": [
+                {
+                    "id": "e9572af7-bf0f-42e3-84de-67a735516d3e",
+                    "name": "Liveness probe",
+                    "request": {
+                        "name": "Liveness probe",
+                        "description": {},
+                        "url": {
+                            "path": [
+                                "health"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "GET",
+                        "body": {},
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "76fc441e-19a7-4db3-a9a9-9cd1b855188b",
+                            "name": "OK",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "health"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"status\": \"ok\",\n  \"version\": \"<string>\",\n  \"environment\": \"development\",\n  \"timestamp\": \"<dateTime>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Resumes",
+            "description": "Parse resume PDFs into a 30-field structured profile",
+            "item": [
+                {
+                    "id": "bfa242f3-0d04-4be9-9fc8-52a843a10bca",
+                    "name": "Parse a resume PDF into a structured Profile",
+                    "request": {
+                        "name": "Parse a resume PDF into a structured Profile",
+                        "description": {
+                            "content": "Claude Haiku 4.5 vision-on-PDF. ~10-20 sec; ~$0.012 per call.\nReturns 30 structured fields including AI/ML signals, ATS score,\nIndia-aware institution tier, and extractive evidence quotes\nfor load-bearing numerics.\n",
+                            "type": "text/plain"
+                        },
+                        "url": {
+                            "path": [
+                                "v1",
+                                "resumes",
+                                "parse"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "disabled": false,
+                                "description": {
+                                    "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                    "type": "text/plain"
+                                },
+                                "key": "Idempotency-Key",
+                                "value": "<uuid>"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"url\": \"<uri>\",\n  \"external_id\": \"<string>\"\n}",
+                            "options": {
+                                "raw": {
+                                    "headerFamily": "json",
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "86035d33-1edd-431b-8084-ce9cca75e644",
+                            "name": "Parsed Profile",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "resumes",
+                                        "parse"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "disabled": false,
+                                        "description": {
+                                            "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Idempotency-Key",
+                                        "value": "<uuid>"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"url\": \"<uri>\",\n  \"external_id\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"id\": \"<string>\",\n  \"workspace_id\": \"ws_\",\n  \"profile\": {\n    \"name\": \"<string>\",\n    \"current_title\": \"<string>\",\n    \"skills\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total\": \"<number>\",\n    \"experience\": [\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"5834-02\",\n        \"end\": \"7728-53\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"5228-88\",\n        \"end\": \"7680-65\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"education\": [\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_1\"\n      },\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_1\"\n      }\n    ],\n    \"ai_ml\": {\n      \"ai_ml_years\": \"<number>\",\n      \"ai_ml_years_evidence\": \"<string>\",\n      \"domain_specializations\": [\n        \"Fraud/Anomaly\",\n        \"Recommendations\"\n      ],\n      \"frameworks_proficient\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"has_llm_experience\": \"<boolean>\",\n      \"llm_evidence\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"ats\": {\n      \"score\": \"<integer>\",\n      \"breakdown\": {\n        \"keywords\": \"<integer>\",\n        \"structure\": \"<integer>\",\n        \"action_verbs\": \"<integer>\",\n        \"quantified_achievements\": \"<integer>\",\n        \"format\": \"<integer>\"\n      },\n      \"score_rationale\": \"<string>\",\n      \"issues\": [\n        {\n          \"category\": \"structure\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        },\n        {\n          \"category\": \"contact_info\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        }\n      ]\n    },\n    \"summary\": \"<string>\",\n    \"strengths\": [\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      },\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      }\n    ],\n    \"gaps\": [\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"MEDIUM\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"CRITICAL\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      }\n    ],\n    \"confidence\": {\n      \"overall\": \"<number>\",\n      \"identity\": \"<number>\",\n      \"experience\": \"<number>\",\n      \"education\": \"<number>\",\n      \"ats\": \"<number>\",\n      \"ai_ml\": \"<number>\",\n      \"compensation\": \"<number>\"\n    },\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"github_url\": \"<string>\",\n    \"portfolio_url\": \"<string>\",\n    \"target_title\": \"<string>\",\n    \"experience_level\": \"Mid\",\n    \"seniority_ladder_position\": \"<string>\",\n    \"skill_clusters\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total_evidence\": \"<string>\",\n    \"compensation\": {\n      \"current_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"monthly\"\n      },\n      \"expected_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"hourly\"\n      },\n      \"notice_period_days\": \"<integer>\",\n      \"evidence\": \"<string>\"\n    },\n    \"low_confidence_reasons\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"source\": \"claude_vision\",\n  \"confidence\": {\n    \"overall\": \"<number>\",\n    \"identity\": \"<number>\",\n    \"experience\": \"<number>\",\n    \"education\": \"<number>\",\n    \"ats\": \"<number>\",\n    \"ai_ml\": \"<number>\",\n    \"compensation\": \"<number>\"\n  }\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "5ea7cfed-54b8-41ac-8346-6b930f2aee63",
+                            "name": "Invalid request body or parameters (e.g. malformed JSON, missing required field)",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "resumes",
+                                        "parse"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "disabled": false,
+                                        "description": {
+                                            "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Idempotency-Key",
+                                        "value": "<uuid>"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/problem+json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"url\": \"<uri>\",\n  \"external_id\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/problem+json"
+                                }
+                            ],
+                            "body": "{\n  \"type\": \"<uri>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"request_id\": \"req_\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "61d06094-e5a1-4a61-8823-b2869c1f8cf5",
+                            "name": "Missing, malformed, or revoked API key",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "resumes",
+                                        "parse"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "disabled": false,
+                                        "description": {
+                                            "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Idempotency-Key",
+                                        "value": "<uuid>"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/problem+json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"url\": \"<uri>\",\n  \"external_id\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Unauthorized",
+                            "code": 401,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/problem+json"
+                                }
+                            ],
+                            "body": "{\n  \"type\": \"<uri>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"request_id\": \"req_\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "5673bb9e-41cc-47dc-99ac-25b624835d6d",
+                            "name": "Request was syntactically valid but semantically wrong (e.g. unreachable resume URL)",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "resumes",
+                                        "parse"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "disabled": false,
+                                        "description": {
+                                            "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Idempotency-Key",
+                                        "value": "<uuid>"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/problem+json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"url\": \"<uri>\",\n  \"external_id\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                            "code": 422,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/problem+json"
+                                }
+                            ],
+                            "body": "{\n  \"type\": \"<uri>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"request_id\": \"req_\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "fd0ee924-7c0b-40de-9f22-5dce4d6f482a",
+                            "name": "Rate limit exceeded (100 req/min/key)",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "resumes",
+                                        "parse"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "disabled": false,
+                                        "description": {
+                                            "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Idempotency-Key",
+                                        "value": "<uuid>"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/problem+json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"url\": \"<uri>\",\n  \"external_id\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Too Many Requests",
+                            "code": 429,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/problem+json"
+                                },
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "Retry-After",
+                                    "value": "<integer>"
+                                },
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "RateLimit-Limit",
+                                    "value": "<integer>"
+                                },
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "RateLimit-Remaining",
+                                    "value": "<integer>"
+                                },
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "RateLimit-Reset",
+                                    "value": "<integer>"
+                                }
+                            ],
+                            "body": "{\n  \"type\": \"<uri>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"request_id\": \"req_\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "391a2280-6f93-4aaa-a15d-fd9c72d3c0bf",
+                            "name": "Claude returned content that failed Zod validation even after retry",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "resumes",
+                                        "parse"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "disabled": false,
+                                        "description": {
+                                            "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Idempotency-Key",
+                                        "value": "<uuid>"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/problem+json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"url\": \"<uri>\",\n  \"external_id\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Bad Gateway",
+                            "code": 502,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/problem+json"
+                                }
+                            ],
+                            "body": "{\n  \"type\": \"<uri>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"request_id\": \"req_\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "885e5f5f-e73e-40c7-98b5-18c992bc1b09",
+                            "name": "Upstream dependency unavailable (Anthropic, Postgres)",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "resumes",
+                                        "parse"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "disabled": false,
+                                        "description": {
+                                            "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Idempotency-Key",
+                                        "value": "<uuid>"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/problem+json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"url\": \"<uri>\",\n  \"external_id\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Service Unavailable",
+                            "code": 503,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/problem+json"
+                                }
+                            ],
+                            "body": "{\n  \"type\": \"<uri>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"request_id\": \"req_\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Candidates",
+            "description": "Persistent person records keyed by your external_id",
+            "item": [
+                {
+                    "id": "6ab63233-602e-491e-987d-348a75c2e5c3",
+                    "name": "Upsert a candidate by external_id",
+                    "request": {
+                        "name": "Upsert a candidate by external_id",
+                        "description": {
+                            "content": "Idempotent on (workspace_id, external_id). Pass `profile` directly\nOR run /v1/resumes/parse first and pass the returned `profile` here.\n",
+                            "type": "text/plain"
+                        },
+                        "url": {
+                            "path": [
+                                "v1",
+                                "candidates"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "disabled": false,
+                                "description": {
+                                    "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                    "type": "text/plain"
+                                },
+                                "key": "Idempotency-Key",
+                                "value": "<uuid>"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"external_id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"voluptateb7\": false\n  }\n}",
+                            "options": {
+                                "raw": {
+                                    "headerFamily": "json",
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "f7a3f21a-baec-4086-83ab-4531b2376848",
+                            "name": "Upserted Candidate",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "candidates"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "disabled": false,
+                                        "description": {
+                                            "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Idempotency-Key",
+                                        "value": "<uuid>"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"external_id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"voluptateb7\": false\n  }\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"id\": \"cand_\",\n  \"workspace_id\": \"ws_\",\n  \"external_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"name\": \"<string>\",\n    \"current_title\": \"<string>\",\n    \"skills\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total\": \"<number>\",\n    \"experience\": [\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"5508-75\",\n        \"end\": \"4821-63\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"2792-61\",\n        \"end\": \"5501-70\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"education\": [\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"unranked\"\n      },\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_1\"\n      }\n    ],\n    \"ai_ml\": {\n      \"ai_ml_years\": \"<number>\",\n      \"ai_ml_years_evidence\": \"<string>\",\n      \"domain_specializations\": [\n        \"Recommendations\",\n        \"Edge/On-device\"\n      ],\n      \"frameworks_proficient\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"has_llm_experience\": \"<boolean>\",\n      \"llm_evidence\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"ats\": {\n      \"score\": \"<integer>\",\n      \"breakdown\": {\n        \"keywords\": \"<integer>\",\n        \"structure\": \"<integer>\",\n        \"action_verbs\": \"<integer>\",\n        \"quantified_achievements\": \"<integer>\",\n        \"format\": \"<integer>\"\n      },\n      \"score_rationale\": \"<string>\",\n      \"issues\": [\n        {\n          \"category\": \"length\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        },\n        {\n          \"category\": \"action_verbs\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        }\n      ]\n    },\n    \"summary\": \"<string>\",\n    \"strengths\": [\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      },\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      }\n    ],\n    \"gaps\": [\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"HIGH\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"MEDIUM\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      }\n    ],\n    \"confidence\": {\n      \"overall\": \"<number>\",\n      \"identity\": \"<number>\",\n      \"experience\": \"<number>\",\n      \"education\": \"<number>\",\n      \"ats\": \"<number>\",\n      \"ai_ml\": \"<number>\",\n      \"compensation\": \"<number>\"\n    },\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"github_url\": \"<string>\",\n    \"portfolio_url\": \"<string>\",\n    \"target_title\": \"<string>\",\n    \"experience_level\": \"Senior\",\n    \"seniority_ladder_position\": \"<string>\",\n    \"skill_clusters\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total_evidence\": \"<string>\",\n    \"compensation\": {\n      \"current_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"hourly\"\n      },\n      \"expected_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"monthly\"\n      },\n      \"notice_period_days\": \"<integer>\",\n      \"evidence\": \"<string>\"\n    },\n    \"low_confidence_reasons\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "7b35659b-5564-4433-b409-ec7855570807",
+                            "name": "Invalid request body or parameters (e.g. malformed JSON, missing required field)",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "candidates"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "disabled": false,
+                                        "description": {
+                                            "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Idempotency-Key",
+                                        "value": "<uuid>"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/problem+json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"external_id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"voluptateb7\": false\n  }\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/problem+json"
+                                }
+                            ],
+                            "body": "{\n  \"type\": \"<uri>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"request_id\": \"req_\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "8397062b-da1c-487c-a874-b34fda8ff259",
+                            "name": "Missing, malformed, or revoked API key",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "candidates"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "disabled": false,
+                                        "description": {
+                                            "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Idempotency-Key",
+                                        "value": "<uuid>"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/problem+json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"external_id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"voluptateb7\": false\n  }\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Unauthorized",
+                            "code": 401,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/problem+json"
+                                }
+                            ],
+                            "body": "{\n  \"type\": \"<uri>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"request_id\": \"req_\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                },
+                {
+                    "id": "d3cd3df8-5417-4782-a477-17659847169b",
+                    "name": "List candidates (cursor-paginated)",
+                    "request": {
+                        "name": "List candidates (cursor-paginated)",
+                        "description": {},
+                        "url": {
+                            "path": [
+                                "v1",
+                                "candidates"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "limit",
+                                    "value": "50"
+                                },
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "Opaque cursor from a previous response's `next_cursor`.",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "cursor",
+                                    "value": "<string>"
+                                }
+                            ],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "GET",
+                        "body": {},
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "a41a4f21-7160-40af-92d5-ab7ba7cc7499",
+                            "name": "Page of Candidates",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "candidates"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "limit",
+                                            "value": "50"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "Opaque cursor from a previous response's `next_cursor`.",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "cursor",
+                                            "value": "<string>"
+                                        }
+                                    ],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"items\": [\n    {\n      \"id\": \"cand_\",\n      \"workspace_id\": \"ws_\",\n      \"external_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"profile\": {\n        \"name\": \"<string>\",\n        \"current_title\": \"<string>\",\n        \"skills\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"years_total\": \"<number>\",\n        \"experience\": [\n          {\n            \"title\": \"<string>\",\n            \"company\": \"<string>\",\n            \"start\": \"9065-04\",\n            \"end\": \"1395-35\",\n            \"summary\": \"<string>\",\n            \"tech_stack\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"quantified_achievements\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"title\": \"<string>\",\n            \"company\": \"<string>\",\n            \"start\": \"9199-63\",\n            \"end\": \"4822-04\",\n            \"summary\": \"<string>\",\n            \"tech_stack\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"quantified_achievements\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ],\n        \"education\": [\n          {\n            \"degree\": \"<string>\",\n            \"institution\": \"<string>\",\n            \"year\": \"<integer>\",\n            \"gpa\": \"<number>\",\n            \"specialization\": \"<string>\",\n            \"institution_tier\": \"tier_2\"\n          },\n          {\n            \"degree\": \"<string>\",\n            \"institution\": \"<string>\",\n            \"year\": \"<integer>\",\n            \"gpa\": \"<number>\",\n            \"specialization\": \"<string>\",\n            \"institution_tier\": \"tier_2\"\n          }\n        ],\n        \"ai_ml\": {\n          \"ai_ml_years\": \"<number>\",\n          \"ai_ml_years_evidence\": \"<string>\",\n          \"domain_specializations\": [\n            \"Tabular ML\",\n            \"Tabular ML\"\n          ],\n          \"frameworks_proficient\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"has_llm_experience\": \"<boolean>\",\n          \"llm_evidence\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"ats\": {\n          \"score\": \"<integer>\",\n          \"breakdown\": {\n            \"keywords\": \"<integer>\",\n            \"structure\": \"<integer>\",\n            \"action_verbs\": \"<integer>\",\n            \"quantified_achievements\": \"<integer>\",\n            \"format\": \"<integer>\"\n          },\n          \"score_rationale\": \"<string>\",\n          \"issues\": [\n            {\n              \"category\": \"length\",\n              \"issue\": \"<string>\",\n              \"before\": \"<string>\",\n              \"after\": \"<string>\"\n            },\n            {\n              \"category\": \"action_verbs\",\n              \"issue\": \"<string>\",\n              \"before\": \"<string>\",\n              \"after\": \"<string>\"\n            }\n          ]\n        },\n        \"summary\": \"<string>\",\n        \"strengths\": [\n          {\n            \"strength\": \"<string>\",\n            \"evidence\": \"<string>\"\n          },\n          {\n            \"strength\": \"<string>\",\n            \"evidence\": \"<string>\"\n          }\n        ],\n        \"gaps\": [\n          {\n            \"name\": \"<string>\",\n            \"severity\": \"MEDIUM\",\n            \"market_reason\": \"<string>\",\n            \"time_to_close\": \"<string>\",\n            \"resource\": \"<string>\",\n            \"resource_url\": \"<string>\",\n            \"cost\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"severity\": \"MEDIUM\",\n            \"market_reason\": \"<string>\",\n            \"time_to_close\": \"<string>\",\n            \"resource\": \"<string>\",\n            \"resource_url\": \"<string>\",\n            \"cost\": \"<string>\"\n          }\n        ],\n        \"confidence\": {\n          \"overall\": \"<number>\",\n          \"identity\": \"<number>\",\n          \"experience\": \"<number>\",\n          \"education\": \"<number>\",\n          \"ats\": \"<number>\",\n          \"ai_ml\": \"<number>\",\n          \"compensation\": \"<number>\"\n        },\n        \"email\": \"<email>\",\n        \"phone\": \"<string>\",\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"linkedin_url\": \"<string>\",\n        \"github_url\": \"<string>\",\n        \"portfolio_url\": \"<string>\",\n        \"target_title\": \"<string>\",\n        \"experience_level\": \"Principal\",\n        \"seniority_ladder_position\": \"<string>\",\n        \"skill_clusters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"years_total_evidence\": \"<string>\",\n        \"compensation\": {\n          \"current_ctc\": {\n            \"value\": \"<number>\",\n            \"currency\": \"<string>\",\n            \"period\": \"monthly\"\n          },\n          \"expected_ctc\": {\n            \"value\": \"<number>\",\n            \"currency\": \"<string>\",\n            \"period\": \"annual\"\n          },\n          \"notice_period_days\": \"<integer>\",\n          \"evidence\": \"<string>\"\n        },\n        \"low_confidence_reasons\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"id\": \"cand_\",\n      \"workspace_id\": \"ws_\",\n      \"external_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"profile\": {\n        \"name\": \"<string>\",\n        \"current_title\": \"<string>\",\n        \"skills\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"years_total\": \"<number>\",\n        \"experience\": [\n          {\n            \"title\": \"<string>\",\n            \"company\": \"<string>\",\n            \"start\": \"5393-09\",\n            \"end\": \"0999-34\",\n            \"summary\": \"<string>\",\n            \"tech_stack\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"quantified_achievements\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"title\": \"<string>\",\n            \"company\": \"<string>\",\n            \"start\": \"0992-17\",\n            \"end\": \"1194-10\",\n            \"summary\": \"<string>\",\n            \"tech_stack\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"quantified_achievements\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ],\n        \"education\": [\n          {\n            \"degree\": \"<string>\",\n            \"institution\": \"<string>\",\n            \"year\": \"<integer>\",\n            \"gpa\": \"<number>\",\n            \"specialization\": \"<string>\",\n            \"institution_tier\": \"tier_2\"\n          },\n          {\n            \"degree\": \"<string>\",\n            \"institution\": \"<string>\",\n            \"year\": \"<integer>\",\n            \"gpa\": \"<number>\",\n            \"specialization\": \"<string>\",\n            \"institution_tier\": \"tier_2\"\n          }\n        ],\n        \"ai_ml\": {\n          \"ai_ml_years\": \"<number>\",\n          \"ai_ml_years_evidence\": \"<string>\",\n          \"domain_specializations\": [\n            \"Time Series\",\n            \"Time Series\"\n          ],\n          \"frameworks_proficient\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"has_llm_experience\": \"<boolean>\",\n          \"llm_evidence\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"ats\": {\n          \"score\": \"<integer>\",\n          \"breakdown\": {\n            \"keywords\": \"<integer>\",\n            \"structure\": \"<integer>\",\n            \"action_verbs\": \"<integer>\",\n            \"quantified_achievements\": \"<integer>\",\n            \"format\": \"<integer>\"\n          },\n          \"score_rationale\": \"<string>\",\n          \"issues\": [\n            {\n              \"category\": \"format\",\n              \"issue\": \"<string>\",\n              \"before\": \"<string>\",\n              \"after\": \"<string>\"\n            },\n            {\n              \"category\": \"action_verbs\",\n              \"issue\": \"<string>\",\n              \"before\": \"<string>\",\n              \"after\": \"<string>\"\n            }\n          ]\n        },\n        \"summary\": \"<string>\",\n        \"strengths\": [\n          {\n            \"strength\": \"<string>\",\n            \"evidence\": \"<string>\"\n          },\n          {\n            \"strength\": \"<string>\",\n            \"evidence\": \"<string>\"\n          }\n        ],\n        \"gaps\": [\n          {\n            \"name\": \"<string>\",\n            \"severity\": \"HIGH\",\n            \"market_reason\": \"<string>\",\n            \"time_to_close\": \"<string>\",\n            \"resource\": \"<string>\",\n            \"resource_url\": \"<string>\",\n            \"cost\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"severity\": \"MEDIUM\",\n            \"market_reason\": \"<string>\",\n            \"time_to_close\": \"<string>\",\n            \"resource\": \"<string>\",\n            \"resource_url\": \"<string>\",\n            \"cost\": \"<string>\"\n          }\n        ],\n        \"confidence\": {\n          \"overall\": \"<number>\",\n          \"identity\": \"<number>\",\n          \"experience\": \"<number>\",\n          \"education\": \"<number>\",\n          \"ats\": \"<number>\",\n          \"ai_ml\": \"<number>\",\n          \"compensation\": \"<number>\"\n        },\n        \"email\": \"<email>\",\n        \"phone\": \"<string>\",\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"linkedin_url\": \"<string>\",\n        \"github_url\": \"<string>\",\n        \"portfolio_url\": \"<string>\",\n        \"target_title\": \"<string>\",\n        \"experience_level\": \"Mid\",\n        \"seniority_ladder_position\": \"<string>\",\n        \"skill_clusters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"years_total_evidence\": \"<string>\",\n        \"compensation\": {\n          \"current_ctc\": {\n            \"value\": \"<number>\",\n            \"currency\": \"<string>\",\n            \"period\": \"hourly\"\n          },\n          \"expected_ctc\": {\n            \"value\": \"<number>\",\n            \"currency\": \"<string>\",\n            \"period\": \"monthly\"\n          },\n          \"notice_period_days\": \"<integer>\",\n          \"evidence\": \"<string>\"\n        },\n        \"low_confidence_reasons\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"has_more\": \"<boolean>\",\n  \"next_cursor\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                },
+                {
+                    "id": "060d1169-5336-4227-be09-2b26f942667b",
+                    "name": "Get a candidate by id",
+                    "request": {
+                        "name": "Get a candidate by id",
+                        "description": {},
+                        "url": {
+                            "path": [
+                                "v1",
+                                "candidates",
+                                ":id"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": [
+                                {
+                                    "type": "any",
+                                    "value": "cand_",
+                                    "key": "id",
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "(Required) ",
+                                        "type": "text/plain"
+                                    }
+                                }
+                            ]
+                        },
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "GET",
+                        "body": {},
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "206e7552-0749-4473-ad31-273edc8c6e08",
+                            "name": "Candidate",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "candidates",
+                                        ":id"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"id\": \"cand_\",\n  \"workspace_id\": \"ws_\",\n  \"external_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"name\": \"<string>\",\n    \"current_title\": \"<string>\",\n    \"skills\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total\": \"<number>\",\n    \"experience\": [\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"5508-75\",\n        \"end\": \"4821-63\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"2792-61\",\n        \"end\": \"5501-70\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"education\": [\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"unranked\"\n      },\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_1\"\n      }\n    ],\n    \"ai_ml\": {\n      \"ai_ml_years\": \"<number>\",\n      \"ai_ml_years_evidence\": \"<string>\",\n      \"domain_specializations\": [\n        \"Recommendations\",\n        \"Edge/On-device\"\n      ],\n      \"frameworks_proficient\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"has_llm_experience\": \"<boolean>\",\n      \"llm_evidence\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"ats\": {\n      \"score\": \"<integer>\",\n      \"breakdown\": {\n        \"keywords\": \"<integer>\",\n        \"structure\": \"<integer>\",\n        \"action_verbs\": \"<integer>\",\n        \"quantified_achievements\": \"<integer>\",\n        \"format\": \"<integer>\"\n      },\n      \"score_rationale\": \"<string>\",\n      \"issues\": [\n        {\n          \"category\": \"length\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        },\n        {\n          \"category\": \"action_verbs\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        }\n      ]\n    },\n    \"summary\": \"<string>\",\n    \"strengths\": [\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      },\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      }\n    ],\n    \"gaps\": [\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"HIGH\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"MEDIUM\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      }\n    ],\n    \"confidence\": {\n      \"overall\": \"<number>\",\n      \"identity\": \"<number>\",\n      \"experience\": \"<number>\",\n      \"education\": \"<number>\",\n      \"ats\": \"<number>\",\n      \"ai_ml\": \"<number>\",\n      \"compensation\": \"<number>\"\n    },\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"github_url\": \"<string>\",\n    \"portfolio_url\": \"<string>\",\n    \"target_title\": \"<string>\",\n    \"experience_level\": \"Senior\",\n    \"seniority_ladder_position\": \"<string>\",\n    \"skill_clusters\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total_evidence\": \"<string>\",\n    \"compensation\": {\n      \"current_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"hourly\"\n      },\n      \"expected_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"monthly\"\n      },\n      \"notice_period_days\": \"<integer>\",\n      \"evidence\": \"<string>\"\n    },\n    \"low_confidence_reasons\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "f9c89d83-bf20-4b41-8a1a-e0c57cecfae9",
+                            "name": "Resource does not exist or is not in this workspace",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "candidates",
+                                        ":id"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/problem+json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "Not Found",
+                            "code": 404,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/problem+json"
+                                }
+                            ],
+                            "body": "{\n  \"type\": \"<uri>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"request_id\": \"req_\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Jobs",
+            "description": "Job descriptions and AI-generated rubrics",
+            "item": [
+                {
+                    "id": "806fed15-16f7-4eaa-9a5c-6c5a229f7a86",
+                    "name": "Upsert a job (auto-generates rubric if absent)",
+                    "request": {
+                        "name": "Upsert a job (auto-generates rubric if absent)",
+                        "description": {
+                            "content": "If `rubric` is omitted, we synthesize a 5-competency rubric from\nthe job description (Claude Haiku 4.5; ~3-5 sec; ~$0.005).\n",
+                            "type": "text/plain"
+                        },
+                        "url": {
+                            "path": [
+                                "v1",
+                                "jobs"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "disabled": false,
+                                "description": {
+                                    "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                    "type": "text/plain"
+                                },
+                                "key": "Idempotency-Key",
+                                "value": "<uuid>"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"external_id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"level\": \"<string>\",\n  \"location\": {\n    \"ut_d9\": true,\n    \"ut_561\": 44332401.33307272,\n    \"nostrud2\": -22821549.666362673\n  },\n  \"salary\": {\n    \"in_5\": -17274667\n  },\n  \"rubric\": {\n    \"competencies\": [\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  }\n}",
+                            "options": {
+                                "raw": {
+                                    "headerFamily": "json",
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "2e150f82-3299-4ee4-bc2f-6e3132d59aea",
+                            "name": "Upserted Job",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "jobs"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "disabled": false,
+                                        "description": {
+                                            "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Idempotency-Key",
+                                        "value": "<uuid>"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"external_id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"level\": \"<string>\",\n  \"location\": {\n    \"ut_d9\": true,\n    \"ut_561\": 44332401.33307272,\n    \"nostrud2\": -22821549.666362673\n  },\n  \"salary\": {\n    \"in_5\": -17274667\n  },\n  \"rubric\": {\n    \"competencies\": [\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  }\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"id\": \"job_\",\n  \"workspace_id\": \"ws_\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rubric\": {\n    \"competencies\": [\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  \"created_at\": \"<dateTime>\",\n  \"external_id\": \"<string>\",\n  \"level\": \"<string>\",\n  \"location\": {\n    \"cillum_18\": \"enim\"\n  },\n  \"salary\": {\n    \"pariaturb\": 10220144.176316783\n  }\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                },
+                {
+                    "id": "2defe8c8-64b8-4711-93f7-009f6cb038f2",
+                    "name": "List jobs (cursor-paginated)",
+                    "request": {
+                        "name": "List jobs (cursor-paginated)",
+                        "description": {},
+                        "url": {
+                            "path": [
+                                "v1",
+                                "jobs"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "limit",
+                                    "value": "50"
+                                },
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "Opaque cursor from a previous response's `next_cursor`.",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "cursor",
+                                    "value": "<string>"
+                                }
+                            ],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "GET",
+                        "body": {},
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "e9475490-371d-4b9c-8594-2412a5978b59",
+                            "name": "Page of Jobs",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "jobs"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "limit",
+                                            "value": "50"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "Opaque cursor from a previous response's `next_cursor`.",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "cursor",
+                                            "value": "<string>"
+                                        }
+                                    ],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"items\": [\n    {\n      \"id\": \"job_\",\n      \"workspace_id\": \"ws_\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"rubric\": {\n        \"competencies\": [\n          {\n            \"name\": \"<string>\",\n            \"weight\": \"<number>\",\n            \"must_have\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nice_to_have\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"weight\": \"<number>\",\n            \"must_have\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nice_to_have\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ]\n      },\n      \"created_at\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"level\": \"<string>\",\n      \"location\": {\n        \"exercitation_cb_\": 60177037,\n        \"magnaca8\": 78926384\n      },\n      \"salary\": {\n        \"veniam_f62\": -73816783.7325454\n      }\n    },\n    {\n      \"id\": \"job_\",\n      \"workspace_id\": \"ws_\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"rubric\": {\n        \"competencies\": [\n          {\n            \"name\": \"<string>\",\n            \"weight\": \"<number>\",\n            \"must_have\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nice_to_have\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"weight\": \"<number>\",\n            \"must_have\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nice_to_have\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ]\n      },\n      \"created_at\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"level\": \"<string>\",\n      \"location\": {\n        \"ad0c4\": \"adipisicing dolor Lorem\"\n      },\n      \"salary\": {\n        \"tempor3f\": -81031797.71659903,\n        \"ea_b5_\": true\n      }\n    }\n  ],\n  \"has_more\": \"<boolean>\",\n  \"next_cursor\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                },
+                {
+                    "id": "74e23494-b795-4db3-841f-fae5ce5325d0",
+                    "name": "Get a job by id",
+                    "request": {
+                        "name": "Get a job by id",
+                        "description": {},
+                        "url": {
+                            "path": [
+                                "v1",
+                                "jobs",
+                                ":id"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": [
+                                {
+                                    "type": "any",
+                                    "value": "job_",
+                                    "key": "id",
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "(Required) ",
+                                        "type": "text/plain"
+                                    }
+                                }
+                            ]
+                        },
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "GET",
+                        "body": {},
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "dd5d9c37-51e9-4f84-beea-b9554f906969",
+                            "name": "Job",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "jobs",
+                                        ":id"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"id\": \"job_\",\n  \"workspace_id\": \"ws_\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rubric\": {\n    \"competencies\": [\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  \"created_at\": \"<dateTime>\",\n  \"external_id\": \"<string>\",\n  \"level\": \"<string>\",\n  \"location\": {\n    \"cillum_18\": \"enim\"\n  },\n  \"salary\": {\n    \"pariaturb\": 10220144.176316783\n  }\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "b9a4af8c-339c-48d5-b9cc-8441be887e85",
+                            "name": "Resource does not exist or is not in this workspace",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "jobs",
+                                        ":id"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/problem+json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "Not Found",
+                            "code": 404,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/problem+json"
+                                }
+                            ],
+                            "body": "{\n  \"type\": \"<uri>\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"code\": \"<string>\",\n  \"request_id\": \"req_\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                },
+                {
+                    "id": "dc8a7002-e522-4888-b110-61256ac2fbf0",
+                    "name": "Score a candidate against this job (5-dim with evidence)",
+                    "request": {
+                        "name": "Score a candidate against this job (5-dim with evidence)",
+                        "description": {
+                            "content": "Returns a 5-dimensional match score (skill_fit, level, location,\nsalary, company_quality) plus a recommendation enum. Every\ndimension includes ≥1 evidence quote from the candidate profile.\n",
+                            "type": "text/plain"
+                        },
+                        "url": {
+                            "path": [
+                                "v1",
+                                "jobs",
+                                ":id",
+                                "match"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": [
+                                {
+                                    "type": "any",
+                                    "value": "job_",
+                                    "key": "id",
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "(Required) ",
+                                        "type": "text/plain"
+                                    }
+                                }
+                            ]
+                        },
+                        "header": [
+                            {
+                                "disabled": false,
+                                "description": {
+                                    "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                    "type": "text/plain"
+                                },
+                                "key": "Idempotency-Key",
+                                "value": "<uuid>"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"candidate_id\": \"cand_\",\n  \"weights\": {\n    \"skill_fit\": \"<number>\",\n    \"level\": \"<number>\",\n    \"location\": \"<number>\",\n    \"salary\": \"<number>\",\n    \"company_quality\": \"<number>\"\n  }\n}",
+                            "options": {
+                                "raw": {
+                                    "headerFamily": "json",
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "3d127fb2-c77e-4759-9d24-0e66f7af44e6",
+                            "name": "Match score",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "jobs",
+                                        ":id",
+                                        "match"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "disabled": false,
+                                        "description": {
+                                            "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Idempotency-Key",
+                                        "value": "<uuid>"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"candidate_id\": \"cand_\",\n  \"weights\": {\n    \"skill_fit\": \"<number>\",\n    \"level\": \"<number>\",\n    \"location\": \"<number>\",\n    \"salary\": \"<number>\",\n    \"company_quality\": \"<number>\"\n  }\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"overall\": \"<number>\",\n  \"dimensions\": {\n    \"skill_fit\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    },\n    \"level\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    },\n    \"location\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    },\n    \"salary\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    },\n    \"company_quality\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    }\n  },\n  \"recommendation\": \"strong_no\",\n  \"confidence\": \"<number>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Applications",
+            "description": "Candidate↔job pairings with optional match scores",
+            "item": [
+                {
+                    "id": "b0be11c5-ac62-45f1-9903-7f508b51d0b3",
+                    "name": "Link a candidate to a job",
+                    "request": {
+                        "name": "Link a candidate to a job",
+                        "description": {},
+                        "url": {
+                            "path": [
+                                "v1",
+                                "applications"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "disabled": false,
+                                "description": {
+                                    "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                    "type": "text/plain"
+                                },
+                                "key": "Idempotency-Key",
+                                "value": "<uuid>"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"candidate_id\": \"cand_\",\n  \"job_id\": \"job_\",\n  \"source\": \"<string>\"\n}",
+                            "options": {
+                                "raw": {
+                                    "headerFamily": "json",
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "5453136d-7395-4fdc-b24f-910548880e78",
+                            "name": "Application",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "applications"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "disabled": false,
+                                        "description": {
+                                            "content": "Set on every write to safely retry. Postgres-authoritative; KV is a\n60s read cache. Replaying with a different body returns 409\nidempotency_key_mismatch.\n",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Idempotency-Key",
+                                        "value": "<uuid>"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"candidate_id\": \"cand_\",\n  \"job_id\": \"job_\",\n  \"source\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"id\": \"app_\",\n  \"workspace_id\": \"ws_\",\n  \"candidate_id\": \"cand_\",\n  \"job_id\": \"job_\",\n  \"stage\": \"applied\",\n  \"status\": \"hired\",\n  \"created_at\": \"<dateTime>\",\n  \"match_score\": {\n    \"overall\": \"<number>\",\n    \"dimensions\": {\n      \"skill_fit\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      },\n      \"level\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      },\n      \"location\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      },\n      \"salary\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      },\n      \"company_quality\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      }\n    },\n    \"recommendation\": \"mixed\",\n    \"confidence\": \"<number>\"\n  },\n  \"source\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                },
+                {
+                    "id": "a09b4113-ab14-49c1-a434-acc50abc8683",
+                    "name": "List applications (cursor-paginated)",
+                    "request": {
+                        "name": "List applications (cursor-paginated)",
+                        "description": {},
+                        "url": {
+                            "path": [
+                                "v1",
+                                "applications"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "limit",
+                                    "value": "50"
+                                },
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "Opaque cursor from a previous response's `next_cursor`.",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "cursor",
+                                    "value": "<string>"
+                                }
+                            ],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "GET",
+                        "body": {},
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "71e75898-b2a9-41f9-bd01-c7cc21eefb88",
+                            "name": "Page of Applications",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "applications"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "limit",
+                                            "value": "50"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "Opaque cursor from a previous response's `next_cursor`.",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "cursor",
+                                            "value": "<string>"
+                                        }
+                                    ],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"items\": [\n    {\n      \"id\": \"app_\",\n      \"workspace_id\": \"ws_\",\n      \"candidate_id\": \"cand_\",\n      \"job_id\": \"job_\",\n      \"stage\": \"applied\",\n      \"status\": \"rejected\",\n      \"created_at\": \"<dateTime>\",\n      \"match_score\": {\n        \"overall\": \"<number>\",\n        \"dimensions\": {\n          \"skill_fit\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"level\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"location\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"salary\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"company_quality\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          }\n        },\n        \"recommendation\": \"strong_yes\",\n        \"confidence\": \"<number>\"\n      },\n      \"source\": \"<string>\"\n    },\n    {\n      \"id\": \"app_\",\n      \"workspace_id\": \"ws_\",\n      \"candidate_id\": \"cand_\",\n      \"job_id\": \"job_\",\n      \"stage\": \"applied\",\n      \"status\": \"hired\",\n      \"created_at\": \"<dateTime>\",\n      \"match_score\": {\n        \"overall\": \"<number>\",\n        \"dimensions\": {\n          \"skill_fit\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"level\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"location\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"salary\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"company_quality\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          }\n        },\n        \"recommendation\": \"yes\",\n        \"confidence\": \"<number>\"\n      },\n      \"source\": \"<string>\"\n    }\n  ],\n  \"has_more\": \"<boolean>\",\n  \"next_cursor\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Usage",
+            "description": "Your own usage, costs, and per-request audit log",
+            "item": [
+                {
+                    "id": "87643c8b-cf92-44ed-b519-3907f4f6bf41",
+                    "name": "Aggregated usage over a time window",
+                    "request": {
+                        "name": "Aggregated usage over a time window",
+                        "description": {
+                            "content": "Totals + per-endpoint + per-day + per-status-bucket for your\nworkspace. Source of truth: usage_events in our Postgres.\n",
+                            "type": "text/plain"
+                        },
+                        "url": {
+                            "path": [
+                                "v1",
+                                "usage",
+                                "summary"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "days",
+                                    "value": "30"
+                                }
+                            ],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "GET",
+                        "body": {},
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "3aa744fd-f06f-4c73-aa6d-f62598aee828",
+                            "name": "Usage summary",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "usage",
+                                        "summary"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "days",
+                                            "value": "30"
+                                        }
+                                    ],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"window_days\": \"<integer>\",\n  \"workspace_id\": \"ws_\",\n  \"totals\": {\n    \"calls\": \"<integer>\",\n    \"cost_usd\": \"<number>\",\n    \"tokens_in\": \"<integer>\",\n    \"tokens_out\": \"<integer>\",\n    \"errors\": \"<integer>\",\n    \"error_rate\": \"<number>\"\n  },\n  \"by_endpoint\": [\n    {\n      \"endpoint\": \"<string>\",\n      \"calls\": \"<integer>\",\n      \"cost_usd\": \"<number>\",\n      \"errors\": \"<integer>\",\n      \"avg_latency_ms\": \"<integer>\"\n    },\n    {\n      \"endpoint\": \"<string>\",\n      \"calls\": \"<integer>\",\n      \"cost_usd\": \"<number>\",\n      \"errors\": \"<integer>\",\n      \"avg_latency_ms\": \"<integer>\"\n    }\n  ],\n  \"by_day\": [\n    {\n      \"day\": \"<date>\",\n      \"calls\": \"<integer>\",\n      \"cost_usd\": \"<number>\",\n      \"errors\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"calls\": \"<integer>\",\n      \"cost_usd\": \"<number>\",\n      \"errors\": \"<integer>\"\n    }\n  ],\n  \"by_status\": [\n    {\n      \"bucket\": \"3xx\",\n      \"count\": \"<integer>\"\n    },\n    {\n      \"bucket\": \"5xx\",\n      \"count\": \"<integer>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                },
+                {
+                    "id": "10eebba3-66ce-41e8-b872-08d8dfce81ac",
+                    "name": "Last N requests for self-debug",
+                    "request": {
+                        "name": "Last N requests for self-debug",
+                        "description": {
+                            "content": "Per-request log for debugging. Use this when /v1/usage/summary\nshows errors and you need to find which specific requests failed.\nFilter `?status=errors` to see only 4xx/5xx, or `?endpoint=parse`\nto narrow by endpoint substring.\n",
+                            "type": "text/plain"
+                        },
+                        "url": {
+                            "path": [
+                                "v1",
+                                "usage",
+                                "recent"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "limit",
+                                    "value": "50"
+                                },
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "status",
+                                    "value": "all"
+                                },
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "endpoint",
+                                    "value": "<string>"
+                                }
+                            ],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "GET",
+                        "body": {},
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "9f471e8a-ecec-4c08-a9aa-0c90fc5a2aab",
+                            "name": "Recent requests",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "v1",
+                                        "usage",
+                                        "recent"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "limit",
+                                            "value": "50"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "status",
+                                            "value": "all"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "endpoint",
+                                            "value": "<string>"
+                                        }
+                                    ],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"workspace_id\": \"<string>\",\n  \"count\": \"<integer>\",\n  \"items\": [\n    {\n      \"timestamp\": \"<dateTime>\",\n      \"endpoint\": \"<string>\",\n      \"status_code\": \"<integer>\",\n      \"request_id\": \"req_\",\n      \"latency_ms\": \"<integer>\",\n      \"cost_usd\": \"<number>\",\n      \"tokens_in\": \"<integer>\",\n      \"tokens_out\": \"<integer>\"\n    },\n    {\n      \"timestamp\": \"<dateTime>\",\n      \"endpoint\": \"<string>\",\n      \"status_code\": \"<integer>\",\n      \"request_id\": \"req_\",\n      \"latency_ms\": \"<integer>\",\n      \"cost_usd\": \"<number>\",\n      \"tokens_in\": \"<integer>\",\n      \"tokens_out\": \"<integer>\"\n    }\n  ],\n  \"filters\": {\n    \"status\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"limit\": \"<integer>\"\n  }\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "type": "any",
+                "value": "{{bearerToken}}",
+                "key": "token"
+            }
+        ]
+    },
+    "event": [],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "https://aiwire-api.aiwire.workers.dev"
+        }
+    ],
+    "info": {
+        "_postman_id": "0ebb8a16-4231-40ae-bf48-af448ee12d1e",
+        "name": "AIWire Platform API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": {
+            "content": "B2B API for AI-powered hiring. Resume PDFs into structured profiles,\njob descriptions into scoring rubrics, candidate × job matches with\nevidence. Every authenticated call is billed and tracked\n(see GET /v1/usage/summary).\n\n**Base URL (production):** https://aiwire-api.aiwire.workers.dev\n\n**Auth:** `Authorization: Bearer sk_live_<your-key>` on every /v1/* call.\nYour key resolves to a workspace; all resources are scoped to that workspace.\n\n**Errors:** RFC 7807 Problem Details with `Aiwire-Request-Id` header on\nevery response (success or failure). Include the request ID in support\nemails.\n\n**Rate limit:** 100 requests / minute per key. Hit a 429? Wait the\n`Retry-After` seconds.\n\n\nContact Support:\n Name: AIWire Platform Support\n Email: chandugopisetty123@gmail.com",
+            "type": "text/plain"
+        }
+    }
+}
