@@ -46,7 +46,7 @@ Send a URL **or** a base64-encoded PDF:
 curl -X POST https://aiwire-api.aiwire.workers.dev/v1/resumes/parse \
   -H "Authorization: Bearer $AIWIRE_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"url": "https://example.com/resume.pdf"}'
+  -d '{"url": "https://raw.githubusercontent.com/himasaichand/aiwire-docs/main/examples/sample-resume.pdf"}'
 
 # Or base64
 curl -X POST https://aiwire-api.aiwire.workers.dev/v1/resumes/parse \

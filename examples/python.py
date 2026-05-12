@@ -26,10 +26,10 @@ def main() -> int:
     if not api_key:
         print("set AIWIRE_KEY=sk_live_...", file=sys.stderr)
         return 2
-    if len(sys.argv) < 3:
-        print("usage: python python.py <pdf> <job-title>", file=sys.stderr)
-        return 2
-    pdf_path, job_title = Path(sys.argv[1]), sys.argv[2]
+    # Defaults to the bundled sample-resume.pdf if no path is given.
+    here = Path(__file__).resolve().parent
+    pdf_path = Path(sys.argv[1]) if len(sys.argv) > 1 else here / "sample-resume.pdf"
+    job_title = sys.argv[2] if len(sys.argv) > 2 else "Senior ML Engineer"
 
     client = httpx.Client(
         base_url=BASE_URL,

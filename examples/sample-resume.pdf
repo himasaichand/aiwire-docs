@@ -1,0 +1,108 @@
+%PDF-1.4
+1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj
+2 0 obj<</Type/Pages/Count 1/Kids[3 0 R]>>endobj
+3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Resources<</Font<</F1<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>>>>>/Contents 4 0 R>>endobj
+4 0 obj<</Length 2438>>stream
+BT
+/F1 11 Tf
+50 770 Td
+(PRIYA SHARMA) Tj
+0 -13 Td
+(Senior ML Engineer  |  priya.sharma@example.com  |  +91 98765 43210) Tj
+0 -13 Td
+(Bangalore, India  |  linkedin.com/in/priyasharma  |  github.com/priyasharma) Tj
+0 -13 Td
+(Current CTC: INR 32 LPA  |  Notice Period: 60 days) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(PROFESSIONAL SUMMARY) Tj
+0 -13 Td
+(Senior Machine Learning Engineer with 6 years of production experience) Tj
+0 -13 Td
+(shipping LLM-based systems, distributed training pipelines, and recommendation) Tj
+0 -13 Td
+(systems. Strong track record of taking models from research to production at) Tj
+0 -13 Td
+(scale \(100+ RPS, 99.9% uptime\).) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(SKILLS) Tj
+0 -13 Td
+(Python, PyTorch, TensorFlow, JAX, Hugging Face Transformers, LangChain,) Tj
+0 -13 Td
+(AWS SageMaker, GCP Vertex AI, Docker, Kubernetes, Ray, MLflow, DVC,) Tj
+0 -13 Td
+(Triton Inference Server, FastAPI, distributed training, RAG, vector DBs) Tj
+0 -13 Td
+(\(Pinecone, Weaviate\), LLM fine-tuning, MLOps, CI/CD) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(EXPERIENCE) Tj
+0 -13 Td
+(Senior ML Engineer  |  Acme AI  |  2022 - Present) Tj
+0 -13 Td
+(- Built production RAG system over 8M documents; latency p95 under 200ms at 200 RPS) Tj
+0 -13 Td
+(- Led distributed training migration to 32-GPU clusters; cut training time 60%) Tj
+0 -13 Td
+(- Owned cost optimization: migrated inference to Triton, reduced spend 40%) Tj
+0 -13 Td
+(- Fine-tuned 7B-parameter LLMs for internal Q&A; precision 92%) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(ML Engineer  |  DataBay Technologies  |  2019 - 2022) Tj
+0 -13 Td
+(- Built feature store and model registry; supports 50+ production models) Tj
+0 -13 Td
+(- Shipped recommendation system to 12M users; lift +14% on engagement) Tj
+0 -13 Td
+(- Designed A/B testing framework for ML models) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(EDUCATION) Tj
+0 -13 Td
+(B.Tech Computer Science  |  IIT Bombay  |  2019  |  CGPA 9.2/10) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(CERTIFICATIONS) Tj
+0 -13 Td
+(AWS Certified Machine Learning - Specialty \(2023\)) Tj
+0 -13 Td
+(DeepLearning.AI Deep Learning Specialization \(2020\)) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(PUBLICATIONS) Tj
+0 -13 Td
+("Efficient Retrieval Augmentation for Multi-Tenant LLMs" - ICML Workshop, 2024) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(PROJECTS) Tj
+0 -13 Td
+(OpenRAG: open-source RAG framework \(1.2k GitHub stars\)) Tj
+0 -13 Td
+(ML Bias Audit Toolkit: detected gender/caste bias signals in 4 production models) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+ET
+endstream
+endobj
+xref
+0 5
+0000000000 65535 f
+0000000009 00000 n
+0000000054 00000 n
+0000000099 00000 n
+0000000229 00000 n
+trailer<</Size 5/Root 1 0 R>>
+startxref
+1400
+%%EOF

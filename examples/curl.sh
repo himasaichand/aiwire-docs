@@ -11,8 +11,10 @@ set -euo pipefail
 BASE_URL="https://aiwire-api.aiwire.workers.dev"
 : "${AIWIRE_KEY:?set AIWIRE_KEY=sk_live_... in your env}"
 
-PDF_PATH="${1:?usage: $0 path/to/resume.pdf \"Job Title\"}"
-JOB_TITLE="${2:?usage: $0 path/to/resume.pdf \"Job Title\"}"
+# Defaults to the bundled sample-resume.pdf next to this script.
+HERE="$(cd "$(dirname "$0")" && pwd)"
+PDF_PATH="${1:-$HERE/sample-resume.pdf}"
+JOB_TITLE="${2:-Senior ML Engineer}"
 
 UUID() { uuidgen 2>/dev/null || python3 -c 'import uuid; print(uuid.uuid4())'; }
 

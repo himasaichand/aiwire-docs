@@ -13,11 +13,10 @@ const BASE_URL = "https://aiwire-api.aiwire.workers.dev";
 const apiKey = process.env.AIWIRE_KEY;
 if (!apiKey) { console.error("set AIWIRE_KEY=sk_live_..."); process.exit(2); }
 
-const [, , pdfPath, jobTitle] = process.argv;
-if (!pdfPath || !jobTitle) {
-  console.error("usage: node node.mjs <pdf> <job-title>");
-  process.exit(2);
-}
+// Defaults to the bundled sample-resume.pdf if no path is given so this
+// script runs end-to-end on a fresh clone with just `node node.mjs`.
+const pdfPath  = process.argv[2] ?? new URL("./sample-resume.pdf", import.meta.url).pathname;
+const jobTitle = process.argv[3] ?? "Senior ML Engineer";
 
 // ─── Minimal client ──────────────────────────────────────────────────────
 async function call(method, path, { body, idempotencyKey } = {}) {

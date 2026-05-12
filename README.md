@@ -65,17 +65,19 @@ curl -H "Authorization: Bearer $AIWIRE_KEY" \
 # → {"items":[],"has_more":false}
 ```
 
-**Parse a resume:**
+**Parse a resume.** This works copy-paste — points at a sample PDF we
+host in this repo, so you'll see a real Profile come back:
 
 ```bash
 curl -X POST https://aiwire-api.aiwire.workers.dev/v1/resumes/parse \
   -H "Authorization: Bearer $AIWIRE_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"url": "https://example.com/resume.pdf"}'
+  -d '{"url": "https://raw.githubusercontent.com/himasaichand/aiwire-docs/main/examples/sample-resume.pdf"}'
 ```
 
 Returns a `Profile` with skills, experience, education, AI/ML signals,
-ATS score, strengths, gaps, and per-section confidence. See [`API.md`](API.md#resume-parsing).
+ATS score, strengths, gaps, and per-section confidence. See
+[`API.md`](API.md#resume-parsing) for the full field list.
 
 **See your usage:**
 
