@@ -5,8 +5,8 @@ info:
   description: |
     B2B API for AI-powered hiring. Resume PDFs into structured profiles,
     job descriptions into scoring rubrics, candidate × job matches with
-    evidence. Every authenticated call is billed and tracked
-    (see GET /v1/usage/summary).
+    evidence, plus a personalized AI/ML news feed per candidate. Every
+    authenticated call is billed and tracked (see GET /v1/usage/summary).
 
     **Base URL (production):** https://aiwire-api.aiwire.workers.dev
 
@@ -45,6 +45,8 @@ tags:
     description: Candidate↔job pairings with optional match scores
   - name: Usage
     description: Your own usage, costs, and per-request audit log
+  - name: Feed
+    description: Personalized AI/ML news feed per candidate
 
 security:
   - SecretKey: []
@@ -163,6 +165,64 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/Candidate" }
+        "404": { $ref: "#/components/responses/NotFound" }
+    patch:
+      tags: [Candidates]
+      summary: Partial update — currently feed_preferences only
+      operationId: patchCandidate
+      description: |
+        Updates feed_preferences for a candidate. Merge semantics: any
+        key you omit retains its existing value. Pass `paused: true` to
+        suspend the feed.
+      parameters:
+        - $ref: "#/components/parameters/CandidateId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                feed_preferences: { $ref: "#/components/schemas/FeedPreferences" }
+      responses:
+        "200":
+          description: Candidate (with new feed_preferences)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Candidate" }
+        "400": { $ref: "#/components/responses/BadRequest" }
+        "404": { $ref: "#/components/responses/NotFound" }
+
+  /v1/candidates/{id}/feed:
+    get:
+      tags: [Feed]
+      summary: Personalized AI/ML news feed for one candidate
+      operationId: getCandidateFeed
+      description: |
+        Returns recent items from a cron-pulled cache of arxiv papers,
+        HuggingFace daily papers, trending HuggingFace models, HN AI
+        tool stories, and the Open LLM Leaderboard. Items are ranked
+        per-candidate using their resume signals (`ai_ml.domain_specializations`,
+        `skills`) plus explicit `feed_preferences`. Personalization
+        deliberately never uses age/DOB — we use `experience_level` +
+        `years_total` as the career-stage proxy.
+      parameters:
+        - $ref: "#/components/parameters/CandidateId"
+        - name: limit
+          in: query
+          schema: { type: integer, minimum: 1, maximum: 50, default: 20 }
+        - name: cursor
+          in: query
+          schema: { type: string, format: date-time, description: "ISO timestamp; items strictly older than this" }
+        - name: topic
+          in: query
+          schema: { type: string, enum: [papers, tools, models, benchmarks] }
+      responses:
+        "200":
+          description: Ranked feed page
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FeedResponse" }
         "404": { $ref: "#/components/responses/NotFound" }
 
   # ─── Jobs ──────────────────────────────────────────────────────────────
@@ -793,6 +853,83 @@ components:
               tokens_in: { type: integer }
               tokens_out: { type: integer }
               request_id: { type: string, pattern: "^req_", nullable: true }
+
+    # ─── Feed ────────────────────────────────────────────────────────────
+    FeedPreferences:
+      type: object
+      description: |
+        Per-candidate news feed prefs. Stored on `candidates.feed_preferences`.
+        Empty/missing = infer everything from the parsed resume.
+        Treat keys as orthogonal — provide only those you want to change.
+      properties:
+        topics:
+          type: array
+          items: { type: string, enum: [papers, tools, models, benchmarks] }
+          description: Topics this user wants. Empty = all topics.
+        domains:
+          type: array
+          items: { type: string }
+          description: |
+            Domain interests (e.g. "nlp", "genai/llms", "computer vision").
+            Overrides `profile.ai_ml.domain_specializations` when non-empty.
+        keywords_include:
+          type: array
+          items: { type: string }
+          description: Extra keywords to boost in ranking.
+        keywords_exclude:
+          type: array
+          items: { type: string }
+          description: Hard penalty — items matching any of these get -5.0 relevance.
+        paused:
+          type: boolean
+          description: When true, the feed endpoint returns an empty list.
+
+    FeedResponse:
+      type: object
+      required: [candidate_id, count, has_more, items]
+      properties:
+        candidate_id: { type: string, pattern: "^cand_" }
+        count: { type: integer }
+        has_more: { type: boolean }
+        next_cursor: { type: string, format: date-time, nullable: true }
+        paused: { type: boolean, description: Present only when feed is paused }
+        personalisation:
+          type: object
+          description: Echoed signals the ranker actually used (debug aid).
+          properties:
+            topics: { type: array, items: { type: string } }
+            domains: { type: array, items: { type: string } }
+            experience_level: { type: string, nullable: true }
+            years_total: { type: number, nullable: true }
+        items:
+          type: array
+          items:
+            type: object
+            required: [id, source, url, title, topics, keywords, published_at, relevance]
+            properties:
+              id: { type: string }
+              source:
+                type: string
+                enum: [arxiv, hn, hf_models, hf_papers, leaderboard]
+              url: { type: string, format: uri }
+              title: { type: string }
+              summary: { type: string, nullable: true }
+              topics:
+                type: array
+                items: { type: string, enum: [papers, tools, models, benchmarks] }
+              keywords:
+                type: array
+                items: { type: string }
+              published_at: { type: string, format: date-time }
+              relevance:
+                type: number
+                description: |
+                  Computed score. 0 = no signal match (recency only). Positive
+                  = topic/domain/skill overlap. Highest first in the response.
+              meta:
+                type: object
+                additionalProperties: true
+                description: Source-specific extras (HF downloads/likes, HN points, arxiv categories, etc.)
 
     # ─── Errors ──────────────────────────────────────────────────────────
     Problem:

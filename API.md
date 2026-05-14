@@ -168,6 +168,34 @@ curl -H "Authorization: Bearer $AIWIRE_KEY" \
 
 `404 not_found` if the id isn't in your workspace.
 
+### `PATCH /v1/candidates/{id}` — update feed preferences
+
+Partial update. Today supports `feed_preferences` only. Merge semantics:
+keys you omit retain their existing values, so you can flip just `paused`
+without re-sending the whole prefs object.
+
+```bash
+curl -X PATCH https://aiwire-api.aiwire.workers.dev/v1/candidates/$CAND_ID \
+  -H "Authorization: Bearer $AIWIRE_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "feed_preferences": {
+      "topics": ["papers", "models"],
+      "domains": ["nlp", "genai/llms"],
+      "keywords_exclude": ["computer vision"],
+      "paused": false
+    }
+  }'
+```
+
+| Field | Type | Notes |
+|---|---|---|
+| `topics` | `("papers" \| "tools" \| "models" \| "benchmarks")[]` | Empty = all four |
+| `domains` | `string[]` | Overrides `profile.ai_ml.domain_specializations` when non-empty |
+| `keywords_include` | `string[]` | Extra keywords to boost in ranking |
+| `keywords_exclude` | `string[]` | Hard penalty (-5.0 relevance) for items matching any of these |
+| `paused` | `boolean` | `true` → feed endpoint returns an empty list |
+
 ---
 
 ## Jobs
@@ -280,6 +308,117 @@ curl -X POST https://aiwire-api.aiwire.workers.dev/v1/applications \
 | `status` | `active` | `active | hired | rejected` |
 
 ### `GET /v1/applications` — list
+
+---
+
+## News feed
+
+Personalised AI/ML news stream per candidate. Returns recent items from a
+**cron-pulled cache** of five free sources: arxiv preprints (cs.CL / cs.LG /
+cs.AI / cs.CV), HuggingFace Daily Papers, trending HuggingFace models,
+HackerNews AI tool stories, and the Open LLM Leaderboard. No LLM call
+per request — ranking is deterministic + cheap.
+
+### `GET /v1/candidates/{id}/feed`
+
+```bash
+curl -H "Authorization: Bearer $AIWIRE_KEY" \
+  "https://aiwire-api.aiwire.workers.dev/v1/candidates/$CAND_ID/feed?limit=20"
+```
+
+Query params:
+
+| Param | Default | Notes |
+|---|---|---|
+| `limit` | 20 | Max 50 |
+| `cursor` | — | ISO timestamp; returns items strictly older than this |
+| `topic` | — | Filter to one of `papers`, `tools`, `models`, `benchmarks` |
+
+Response:
+
+```json
+{
+  "candidate_id": "cand_01K...",
+  "count": 20,
+  "has_more": true,
+  "next_cursor": "2026-05-13T08:15:00.000Z",
+  "personalisation": {
+    "topics": ["papers", "models"],
+    "domains": ["nlp", "genai/llms"],
+    "experience_level": "Senior",
+    "years_total": 6
+  },
+  "items": [
+    {
+      "id": "feed_...",
+      "source": "arxiv",
+      "url": "https://arxiv.org/abs/2405.12345",
+      "title": "Chain-of-Thought with Tool Use",
+      "summary": "We show that letting an LLM call tools during reasoning improves benchmark performance",
+      "topics": ["papers", "benchmarks"],
+      "keywords": ["genai/llms"],
+      "published_at": "2026-05-13T10:14:00.000Z",
+      "relevance": 4.30,
+      "meta": { "categories": ["cs.CL"] }
+    }
+  ]
+}
+```
+
+### How ranking works
+
+The formula is straightforward and printed in the response so you can debug
+surprising results:
+
+```
+relevance =
+   2.0 * (item.topics  ∩ preferences.topics)             explicit pref wins
+ + 1.0 * (item.keywords ∩ candidate.domains)             resume signal
+ + 0.5 * (item.keywords ∩ candidate.skills)              technical alignment
+ + 1.0 * (item.keywords ∩ preferences.keywords_include)
+ - 5.0 * (item.keywords ∩ preferences.keywords_exclude)  hard penalty
+ + recency_boost(published_at)                            <1d=+1.0, <7d=+0.3, older=0
+```
+
+Items with negative relevance are filtered out. Final sort: relevance DESC,
+then `published_at` DESC.
+
+### How personalisation is derived
+
+In order of precedence:
+
+1. **Explicit preferences** (`PATCH /v1/candidates/{id}` — see [Candidates](#candidates)).
+2. **Resume signals** — `profile.ai_ml.domain_specializations`, `profile.skills`,
+   `profile.experience_level`, `profile.years_total`.
+
+> **Note on age.** The parser deliberately doesn't extract age or date of
+> birth (bias firewall). Career-stage personalisation uses `experience_level`
+> and `years_total` instead — this is strictly more useful than age and
+> doesn't introduce protected-attribute exposure.
+
+### Pausing the feed
+
+```bash
+curl -X PATCH .../v1/candidates/$CAND_ID \
+  -d '{"feed_preferences":{"paused":true}}'
+```
+
+The feed endpoint then returns `{ count: 0, items: [], paused: true }`.
+
+### Source cadence
+
+The cron-pulled cache refreshes on this schedule:
+
+| Source | Cadence | Why |
+|---|---|---|
+| HN AI tool stories | hourly | News is fast-moving |
+| HuggingFace trending models | hourly | Releases happen any time |
+| arxiv preprints (cs.CL / cs.LG / cs.AI / cs.CV) | every 6h | Papers don't churn faster than that |
+| HuggingFace Daily Papers | every 6h | Daily set, low frequency |
+| Open LLM Leaderboard | daily 06:00 UTC | Snapshot of the day's leaderboard |
+
+A new item shows up in the feed within one cadence window of being posted at
+source. You don't need to do anything to refresh — just call the endpoint.
 
 ---
 

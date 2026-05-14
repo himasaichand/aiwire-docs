@@ -105,7 +105,25 @@ def main() -> int:
     )
     print(f"  ✓ Application {app['id']}")
 
-    # 6. Today's spend.
+    # 6. Set feed preferences + pull personalised AI/ML news feed.
+    print("→ Setting feed preferences + fetching news feed...")
+    call(
+        "PATCH",
+        f"/v1/candidates/{candidate['id']}",
+        {
+            "feed_preferences": {
+                "topics": ["papers", "models", "benchmarks"],
+                "keywords_exclude": ["computer vision"],
+            }
+        },
+    )
+    feed = call("GET", f"/v1/candidates/{candidate['id']}/feed?limit=5")
+    domains = ", ".join(feed.get("personalisation", {}).get("domains", [])) or "profile defaults"
+    print(f"  ✓ {feed['count']} feed items (personalised on: {domains})")
+    for it in feed["items"][:5]:
+        print(f"    [{it['relevance']:.2f}] {it['source']:<11} {it['title'][:70]}")
+
+    # 7. Today's spend.
     usage = call("GET", "/v1/usage/summary?days=1")
     print(f"\nToday: ${usage['totals']['cost_usd']:.4f} across {usage['totals']['calls']} calls")
     return 0

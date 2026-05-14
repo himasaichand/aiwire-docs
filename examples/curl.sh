@@ -76,7 +76,20 @@ APP=$(curl -sS -X POST "$BASE_URL/v1/applications" \
 APP_ID=$(echo "$APP" | jq -r .id)
 echo "  ✓ Application $APP_ID"
 
-# 6. Show today's spend.
+# 6. Set feed preferences + pull the personalised AI/ML news feed.
+echo "→ Setting feed preferences + pulling feed..."
+curl -sS -X PATCH "$BASE_URL/v1/candidates/$CAND_ID" \
+  -H "Authorization: Bearer $AIWIRE_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"feed_preferences": {"topics": ["papers", "models", "benchmarks"], "keywords_exclude": ["computer vision"]}}' > /dev/null
+
+FEED=$(curl -sS -H "Authorization: Bearer $AIWIRE_KEY" "$BASE_URL/v1/candidates/$CAND_ID/feed?limit=5")
+FEED_COUNT=$(echo "$FEED" | jq -r .count)
+DOMAINS=$(echo "$FEED" | jq -r '.personalisation.domains | join(", ")')
+echo "  ✓ $FEED_COUNT feed items (personalised on: ${DOMAINS:-profile defaults})"
+echo "$FEED" | jq -r '.items[] | "    [\(.relevance)] \(.source) — \(.title[0:70])"'
+
+# 7. Show today's spend.
 USAGE=$(curl -sS -H "Authorization: Bearer $AIWIRE_KEY" "$BASE_URL/v1/usage/summary?days=1")
 TODAY_COST=$(echo "$USAGE" | jq -r '.totals.cost_usd')
 TODAY_CALLS=$(echo "$USAGE" | jq -r '.totals.calls')

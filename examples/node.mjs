@@ -94,6 +94,17 @@ const { data: app } = await call("POST", "/v1/applications", {
 });
 console.log(`  ✓ Application ${app.id}`);
 
-// 6. Show today's spend.
+// 6. Set feed preferences + pull the personalised AI/ML news feed.
+console.log("→ Setting feed preferences + fetching news feed...");
+await call("PATCH", `/v1/candidates/${candidate.id}`, {
+  body: { feed_preferences: { topics: ["papers", "models", "benchmarks"], keywords_exclude: ["computer vision"] } },
+});
+const { data: feed } = await call("GET", `/v1/candidates/${candidate.id}/feed?limit=5`);
+console.log(`  ✓ ${feed.count} feed items (personalised on: ${(feed.personalisation?.domains ?? []).join(", ") || "profile defaults"})`);
+for (const it of feed.items.slice(0, 5)) {
+  console.log(`    [${it.relevance.toFixed(2)}] ${it.source.padEnd(11)} ${it.title.slice(0, 70)}`);
+}
+
+// 7. Show today's spend.
 const { data: usage } = await call("GET", "/v1/usage/summary?days=1");
 console.log(`\nToday: $${usage.totals.cost_usd.toFixed(4)} across ${usage.totals.calls} calls`);
