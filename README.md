@@ -44,11 +44,22 @@ Daily Papers), new open-source models (HuggingFace), AI tools / launches
 (HN), and LLM benchmarks (Open LLM Leaderboard). Two ways to call:
 - `GET /v1/candidates/{id}/feed` — for stored candidates, uses their
   resume signals + `feed_preferences`.
-- `POST /v1/feed/recommend` — **stateless**. Send personalisation signals
+- `POST /v1/recommendations` — **stateless**. Send personalisation signals
   in the body; we persist nothing, you never have to upload user PII to
   us. Same response shape.
 
 Free. Cron-pulled cache, no per-call LLM cost.
+
+**Stateless compute endpoints.** Every LLM-backed feature has a
+**no-persist** variant so callers don't have to mirror their data to us:
+- `POST /v1/rubrics` — JD text → 5-competency rubric
+- `POST /v1/match_scores` — candidate profile + rubric → 5-dim score with
+  evidence
+- `POST /v1/recommendations` — signals → ranked news feed
+- `POST /v1/resumes/parse` (already was stateless — `id` is transient)
+
+Same LLM call, same response shape as the stateful versions. Nothing
+about the request body is written to our DB.
 
 **Baked in.** Bias firewall (no age / gender / caste / marital / etc.),
 RFC 7807 errors with stable codes, `Idempotency-Key` headers, cursor
@@ -120,7 +131,9 @@ or Python.
 | `GET` | [`/v1/usage/summary`](API.md#usage) | Aggregated usage |
 | `GET` | [`/v1/usage/recent`](API.md#usage) | Per-request audit log |
 | `GET` | [`/v1/candidates/{id}/feed`](API.md#news-feed) | Personalised feed for a stored candidate |
-| `POST` | [`/v1/feed/recommend`](API.md#news-feed) | Stateless feed — signals in body, nothing persisted |
+| `POST` | [`/v1/recommendations`](API.md#news-feed) | Stateless feed — signals in body, nothing persisted |
+| `POST` | [`/v1/rubrics`](API.md#stateless-rubric-generation) | Stateless rubric generation — JD → rubric, nothing persisted |
+| `POST` | [`/v1/match_scores`](API.md#stateless-match-scoring) | Stateless match scoring — profile + rubric → 5-dim score, nothing persisted |
 | `PATCH` | [`/v1/candidates/{id}`](API.md#candidates) | Update feed preferences |
 
 ---

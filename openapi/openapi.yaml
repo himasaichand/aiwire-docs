@@ -193,17 +193,17 @@ paths:
         "400": { $ref: "#/components/responses/BadRequest" }
         "404": { $ref: "#/components/responses/NotFound" }
 
-  /v1/feed/recommend:
+  /v1/recommendations:
     post:
       tags: [Feed]
       summary: Stateless personalised feed (no candidate record required)
-      operationId: recommendFeed
+      operationId: createRecommendations
       description: |
         Returns a ranked AI/ML news feed personalised by the signals in
-        the request body. We do **not** persist any part of the body — no
-        candidate is created, no PII is stored. Designed for serving a
-        feed to every developer on your platform without uploading their
-        profiles to us.
+        the request body. We do **not** persist any part of the body —
+        no candidate is created, no PII is stored. Designed for serving
+        a feed to every developer on your platform without uploading
+        their profiles to us.
 
         Pass as little or as much as you want:
         - `preferences.topics` only → topic-filtered feed
@@ -213,6 +213,10 @@ paths:
 
         Same item shape, same ranking formula, same `image_url`
         thumbnails as the candidate-scoped endpoint.
+
+        > Renamed from `POST /v1/feed/recommend` on 2026-05-15. The old
+        > URL still works through 2026-06-15 but returns the standard
+        > `Deprecation: true` / `Sunset` / `Link` headers.
       requestBody:
         required: true
         content:
@@ -226,6 +230,77 @@ paths:
               schema: { $ref: "#/components/schemas/FeedResponse" }
         "400": { $ref: "#/components/responses/BadRequest" }
         "401": { $ref: "#/components/responses/Unauthorized" }
+
+  /v1/rubrics:
+    post:
+      tags: [Jobs]
+      summary: Stateless rubric generation (no job record required)
+      operationId: createRubric
+      description: |
+        Synthesises a 5-competency scoring rubric from a job title +
+        description. Same LLM call as `POST /v1/jobs` (without supplying
+        `rubric`), but **nothing is persisted** — no job row, no rubric
+        stored. Compose with `POST /v1/match_scores` to score a
+        candidate against the returned rubric.
+
+        ~3–5 sec; ~$0.005 per call. Send `Idempotency-Key` to make
+        retries safe.
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/RubricInput" }
+      responses:
+        "200":
+          description: Generated rubric + model id
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/RubricResponse" }
+        "400": { $ref: "#/components/responses/BadRequest" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+        "502": { $ref: "#/components/responses/AIFailed" }
+        "503": { $ref: "#/components/responses/ServiceUnavailable" }
+
+  /v1/match_scores:
+    post:
+      tags: [Jobs]
+      summary: Stateless candidate × job match scoring
+      operationId: createMatchScore
+      description: |
+        Same 5-dim match scoring as `POST /v1/jobs/{id}/match`, but takes
+        the candidate profile + job rubric inline. **Nothing is
+        persisted** — no candidate, job, or application record is created.
+
+        Caller composes:
+          1. `POST /v1/rubrics` with their JD → rubric JSON
+          2. `POST /v1/match_scores` with that rubric + a candidate
+             profile → 5-dim score with evidence per dimension.
+
+        Response echoes `rubric_used`, `weights_used`, and
+        `model_version` so you can diff what you sent against what was
+        scored (protects against weights-override surprises).
+
+        ~3–5 sec; ~$0.005 per call. Send `Idempotency-Key` to make
+        retries safe.
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MatchScoreInput" }
+      responses:
+        "200":
+          description: 5-dim match score with evidence + echoed inputs
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MatchScoreResponse" }
+        "400": { $ref: "#/components/responses/BadRequest" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+        "502": { $ref: "#/components/responses/AIFailed" }
+        "503": { $ref: "#/components/responses/ServiceUnavailable" }
 
   /v1/candidates/{id}/feed:
     get:
@@ -889,6 +964,82 @@ components:
               request_id: { type: string, pattern: "^req_", nullable: true }
 
     # ─── Feed ────────────────────────────────────────────────────────────
+    RubricInput:
+      type: object
+      required: [title, description]
+      properties:
+        title: { type: string, minLength: 1, maxLength: 200 }
+        description: { type: string, minLength: 1, maxLength: 8000 }
+        level: { type: string }
+        location: { type: object, additionalProperties: true }
+        salary: { type: object, additionalProperties: true }
+
+    RubricResponse:
+      type: object
+      required: [rubric, model_version]
+      properties:
+        rubric: { $ref: "#/components/schemas/Rubric" }
+        model_version:
+          type: string
+          description: |
+            The pinned Claude snapshot that produced this rubric.
+            Stable for the lifetime of the snapshot (months).
+
+    MatchScoreInput:
+      type: object
+      required: [candidate, job]
+      description: |
+        Pass the candidate's profile and the job (with rubric — generate
+        one first via `POST /v1/rubrics` if you don't have one).
+        Optional `weights` override the rubric's competency weights for
+        this scoring call only.
+      properties:
+        candidate:
+          type: object
+          required: [profile]
+          properties:
+            profile:
+              type: object
+              description: |
+                The full profile object from `POST /v1/resumes/parse`
+                (preferred — richest signal), or any subset that has
+                enough for the LLM to reason about (skills, experience,
+                ai_ml signals).
+              additionalProperties: true
+        job:
+          type: object
+          required: [title, description, rubric]
+          properties:
+            title: { type: string }
+            description: { type: string }
+            rubric: { $ref: "#/components/schemas/Rubric" }
+        weights:
+          type: object
+          properties:
+            skill_fit: { type: number, minimum: 0, maximum: 1 }
+            level: { type: number, minimum: 0, maximum: 1 }
+            location: { type: number, minimum: 0, maximum: 1 }
+            salary: { type: number, minimum: 0, maximum: 1 }
+            company_quality: { type: number, minimum: 0, maximum: 1 }
+
+    MatchScoreResponse:
+      allOf:
+        - $ref: "#/components/schemas/MatchScore"
+        - type: object
+          description: |
+            Same fields as the stateful match score (overall + 5
+            dimensions + recommendation + confidence) **plus** echoed
+            inputs so callers can diff "what I sent" against "what
+            was scored." Critical when using weights overrides.
+          required: [rubric_used, model_version]
+          properties:
+            rubric_used: { $ref: "#/components/schemas/Rubric" }
+            weights_used:
+              type: object
+              nullable: true
+              description: Effective weight overrides — `null` if none were passed.
+            model_version: { type: string }
+
     FeedRecommendInput:
       type: object
       description: |

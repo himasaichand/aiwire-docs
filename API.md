@@ -286,6 +286,95 @@ Optionally override rubric weights for this scoring call only:
 
 ---
 
+## Stateless rubric generation
+
+### `POST /v1/rubrics`
+
+Same LLM call as `POST /v1/jobs` (with auto-rubric), but **nothing is
+persisted** — no job row, no rubric stored. Caller composes with
+`POST /v1/match_scores` to score a candidate against the returned rubric.
+
+```bash
+curl -X POST https://aiwire-api.aiwire.workers.dev/v1/rubrics \
+  -H "Authorization: Bearer $AIWIRE_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: $(uuidgen)" \
+  -d '{
+    "title": "Senior ML Engineer",
+    "description": "5+ years building production ML systems, PyTorch, MLOps, distributed training. Remote India."
+  }'
+```
+
+Returns:
+
+```json
+{
+  "rubric": {
+    "competencies": [
+      { "name": "Production ML Systems Design", "weight": 0.28, "must_have": [...], "nice_to_have": [...] },
+      { "name": "Deep Learning Frameworks & Implementation", "weight": 0.25, ... }
+    ]
+  },
+  "model_version": "claude-haiku-4-5-20251001"
+}
+```
+
+~3–5 sec; ~$0.005 per call.
+
+---
+
+## Stateless match scoring
+
+### `POST /v1/match_scores`
+
+Same 5-dim scoring as `POST /v1/jobs/{id}/match`, but **nothing is
+persisted**. Pass the candidate profile + rubric inline.
+
+```bash
+curl -X POST https://aiwire-api.aiwire.workers.dev/v1/match_scores \
+  -H "Authorization: Bearer $AIWIRE_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: $(uuidgen)" \
+  -d '{
+    "candidate": {
+      "profile": { /* the full profile from /v1/resumes/parse, or any subset */ }
+    },
+    "job": {
+      "title": "Senior ML Engineer",
+      "description": "...",
+      "rubric": { /* from /v1/rubrics */ }
+    },
+    "weights": {
+      "skill_fit": 0.4, "level": 0.2,
+      "location": 0.1, "salary": 0.15, "company_quality": 0.15
+    }
+  }'
+```
+
+Returns the standard `MatchScore` (overall, dimensions, recommendation,
+confidence) **plus** the echo block:
+
+```json
+{
+  "overall": 0.78,
+  "dimensions": { /* 5 dims with evidence */ },
+  "recommendation": "yes",
+  "confidence": 0.82,
+  "rubric_used": { /* the exact rubric the LLM scored against */ },
+  "weights_used": { "skill_fit": 0.4, ... },
+  "model_version": "claude-haiku-4-5-20251001"
+}
+```
+
+**Why the echo?** When you pass a `weights` override, you can't tell
+from `overall` alone whether the shift came from the candidate's
+profile or your weight choice. The echoed `rubric_used` +
+`weights_used` let you diff what you sent against what was scored.
+
+~3–5 sec; ~$0.005 per call.
+
+---
+
 ## Applications
 
 An application links a candidate to a job, with optional `match_score`,
@@ -319,7 +408,12 @@ cs.AI / cs.CV), HuggingFace Daily Papers, trending HuggingFace models,
 HackerNews AI tool stories, and the Open LLM Leaderboard. No LLM call
 per request — ranking is deterministic + cheap.
 
-### `POST /v1/feed/recommend` — stateless
+### `POST /v1/recommendations` — stateless
+
+> Renamed from `POST /v1/feed/recommend` on 2026-05-15. The old URL
+> still works through 2026-06-15 but returns the standard
+> `Deprecation: true` / `Sunset` / `Link` headers. Update integrations
+> to the new URL.
 
 Same ranked feed, but with the personalisation signals passed inline.
 **We do not persist any part of the request body.** Use this when you
