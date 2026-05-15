@@ -926,6 +926,18 @@ components:
                 description: |
                   Computed score. 0 = no signal match (recency only). Positive
                   = topic/domain/skill overlap. Highest first in the response.
+              image_url:
+                type: string
+                nullable: true
+                description: |
+                  Thumbnail to render alongside the item. Set at ingest time
+                  using source-specific patterns: alphaXiv first-figure for
+                  arxiv (`paper-assets.alphaxiv.org/image/<id>v1.png`); HF's
+                  social-thumbnail CDN for HF models + papers; the linked
+                  page's og:image for HN (with an SVG fallback when
+                  extraction fails); a generated SVG sparkline of benchmark
+                  scores for leaderboard entries. Always render with an
+                  onerror fallback — a remote URL may 404 over time.
               meta:
                 type: object
                 additionalProperties: true

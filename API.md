@@ -359,10 +359,31 @@ Response:
       "keywords": ["genai/llms"],
       "published_at": "2026-05-13T10:14:00.000Z",
       "relevance": 4.30,
+      "image_url": "https://paper-assets.alphaxiv.org/image/2405.12345v1.png",
       "meta": { "categories": ["cs.CL"] }
     }
   ]
 }
+```
+
+### Thumbnails (`image_url`)
+
+Every item carries a thumbnail URL set deterministically at ingest:
+
+| Source | Thumbnail source | Format |
+|---|---|---|
+| `arxiv` | `paper-assets.alphaxiv.org/image/<id>v1.png` (alphaXiv first-figure) | PNG |
+| `hf_papers` | `paper.mediaUrls[0]` when present, else HF social-thumbnails CDN | PNG |
+| `hf_models` | `cdn-thumbnails.huggingface.co/social-thumbnails/models/<id>.png` | PNG |
+| `hn` | Real og:image / twitter:image extracted from the linked page | varies |
+| `hn` (fallback) | Generated SVG card with title + favicon (when no og:image) | `data:image/svg+xml` |
+| `leaderboard` | Generated SVG sparkline of MMLU / IFEval / GPQA / Avg scores | `data:image/svg+xml` |
+
+Render with an `onerror` fallback — a remote URL can 404 (rare for HF /
+alphaXiv, more common for HN-linked sites). Example:
+
+```html
+<img src="${item.image_url}" onerror="this.style.display='none'" />
 ```
 
 ### How ranking works

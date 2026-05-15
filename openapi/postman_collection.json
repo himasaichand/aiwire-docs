@@ -5,7 +5,7 @@
             "description": "Liveness checks",
             "item": [
                 {
-                    "id": "ca5284ac-4f2c-4911-a7b0-447f711903dd",
+                    "id": "b96dd592-dcf4-4d06-b58a-dde447b4e605",
                     "name": "Liveness probe",
                     "request": {
                         "name": "Liveness probe",
@@ -32,7 +32,7 @@
                     },
                     "response": [
                         {
-                            "id": "5db151e3-8c4e-496d-a026-af7b20b77ef0",
+                            "id": "26cf8415-b327-47fc-b2b0-5908fbcc56f4",
                             "name": "OK",
                             "originalRequest": {
                                 "url": {
@@ -70,7 +70,7 @@
                                     "value": "application/json"
                                 }
                             ],
-                            "body": "{\n  \"status\": \"ok\",\n  \"version\": \"<string>\",\n  \"environment\": \"development\",\n  \"timestamp\": \"<dateTime>\"\n}",
+                            "body": "{\n  \"status\": \"ok\",\n  \"version\": \"<string>\",\n  \"environment\": \"production\",\n  \"timestamp\": \"<dateTime>\"\n}",
                             "cookie": [],
                             "_postman_previewlanguage": "json"
                         }
@@ -87,7 +87,7 @@
             "description": "Parse resume PDFs into a 30-field structured profile",
             "item": [
                 {
-                    "id": "d51ee015-3f34-4be1-beb6-5b29963c4738",
+                    "id": "91140220-d916-4a5b-96fe-b50b79fd4794",
                     "name": "Parse a resume PDF into a structured Profile",
                     "request": {
                         "name": "Parse a resume PDF into a structured Profile",
@@ -141,7 +141,7 @@
                     },
                     "response": [
                         {
-                            "id": "376ac027-1a7e-46db-a998-755b8d66a8c1",
+                            "id": "60bb75d1-f8b2-40f7-b7cc-c65df62b82e9",
                             "name": "Parsed Profile",
                             "originalRequest": {
                                 "url": {
@@ -203,12 +203,12 @@
                                     "value": "application/json"
                                 }
                             ],
-                            "body": "{\n  \"id\": \"<string>\",\n  \"workspace_id\": \"ws_\",\n  \"profile\": {\n    \"name\": \"<string>\",\n    \"current_title\": \"<string>\",\n    \"skills\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total\": \"<number>\",\n    \"experience\": [\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"6082-07\",\n        \"end\": \"6260-51\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"0959-92\",\n        \"end\": \"8276-09\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"education\": [\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_3\"\n      },\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_1\"\n      }\n    ],\n    \"ai_ml\": {\n      \"ai_ml_years\": \"<number>\",\n      \"ai_ml_years_evidence\": \"<string>\",\n      \"domain_specializations\": [\n        \"Robotics\",\n        \"Computer Vision\"\n      ],\n      \"frameworks_proficient\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"has_llm_experience\": \"<boolean>\",\n      \"llm_evidence\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"ats\": {\n      \"score\": \"<integer>\",\n      \"breakdown\": {\n        \"keywords\": \"<integer>\",\n        \"structure\": \"<integer>\",\n        \"action_verbs\": \"<integer>\",\n        \"quantified_achievements\": \"<integer>\",\n        \"format\": \"<integer>\"\n      },\n      \"score_rationale\": \"<string>\",\n      \"issues\": [\n        {\n          \"category\": \"quantified_achievements\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        },\n        {\n          \"category\": \"keywords\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        }\n      ]\n    },\n    \"summary\": \"<string>\",\n    \"strengths\": [\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      },\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      }\n    ],\n    \"gaps\": [\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"HIGH\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"MEDIUM\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      }\n    ],\n    \"confidence\": {\n      \"overall\": \"<number>\",\n      \"identity\": \"<number>\",\n      \"experience\": \"<number>\",\n      \"education\": \"<number>\",\n      \"ats\": \"<number>\",\n      \"ai_ml\": \"<number>\",\n      \"compensation\": \"<number>\"\n    },\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"github_url\": \"<string>\",\n    \"portfolio_url\": \"<string>\",\n    \"target_title\": \"<string>\",\n    \"experience_level\": \"Principal\",\n    \"seniority_ladder_position\": \"<string>\",\n    \"skill_clusters\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total_evidence\": \"<string>\",\n    \"compensation\": {\n      \"current_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"annual\"\n      },\n      \"expected_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"annual\"\n      },\n      \"notice_period_days\": \"<integer>\",\n      \"evidence\": \"<string>\"\n    },\n    \"low_confidence_reasons\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"source\": \"claude_vision\",\n  \"confidence\": {\n    \"overall\": \"<number>\",\n    \"identity\": \"<number>\",\n    \"experience\": \"<number>\",\n    \"education\": \"<number>\",\n    \"ats\": \"<number>\",\n    \"ai_ml\": \"<number>\",\n    \"compensation\": \"<number>\"\n  }\n}",
+                            "body": "{\n  \"id\": \"<string>\",\n  \"workspace_id\": \"ws_\",\n  \"profile\": {\n    \"name\": \"<string>\",\n    \"current_title\": \"<string>\",\n    \"skills\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total\": \"<number>\",\n    \"experience\": [\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"1019-92\",\n        \"end\": \"3212-23\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"6841-12\",\n        \"end\": \"1349-14\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"education\": [\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_1\"\n      },\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_1\"\n      }\n    ],\n    \"ai_ml\": {\n      \"ai_ml_years\": \"<number>\",\n      \"ai_ml_years_evidence\": \"<string>\",\n      \"domain_specializations\": [\n        \"MLOps\",\n        \"Computer Vision\"\n      ],\n      \"frameworks_proficient\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"has_llm_experience\": \"<boolean>\",\n      \"llm_evidence\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"ats\": {\n      \"score\": \"<integer>\",\n      \"breakdown\": {\n        \"keywords\": \"<integer>\",\n        \"structure\": \"<integer>\",\n        \"action_verbs\": \"<integer>\",\n        \"quantified_achievements\": \"<integer>\",\n        \"format\": \"<integer>\"\n      },\n      \"score_rationale\": \"<string>\",\n      \"issues\": [\n        {\n          \"category\": \"keywords\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        },\n        {\n          \"category\": \"action_verbs\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        }\n      ]\n    },\n    \"summary\": \"<string>\",\n    \"strengths\": [\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      },\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      }\n    ],\n    \"gaps\": [\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"CRITICAL\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"CRITICAL\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      }\n    ],\n    \"confidence\": {\n      \"overall\": \"<number>\",\n      \"identity\": \"<number>\",\n      \"experience\": \"<number>\",\n      \"education\": \"<number>\",\n      \"ats\": \"<number>\",\n      \"ai_ml\": \"<number>\",\n      \"compensation\": \"<number>\"\n    },\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"github_url\": \"<string>\",\n    \"portfolio_url\": \"<string>\",\n    \"target_title\": \"<string>\",\n    \"experience_level\": \"Director\",\n    \"seniority_ladder_position\": \"<string>\",\n    \"skill_clusters\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total_evidence\": \"<string>\",\n    \"compensation\": {\n      \"current_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"annual\"\n      },\n      \"expected_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"hourly\"\n      },\n      \"notice_period_days\": \"<integer>\",\n      \"evidence\": \"<string>\"\n    },\n    \"low_confidence_reasons\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"source\": \"claude_vision\",\n  \"confidence\": {\n    \"overall\": \"<number>\",\n    \"identity\": \"<number>\",\n    \"experience\": \"<number>\",\n    \"education\": \"<number>\",\n    \"ats\": \"<number>\",\n    \"ai_ml\": \"<number>\",\n    \"compensation\": \"<number>\"\n  }\n}",
                             "cookie": [],
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "71d6ae28-9896-4988-83d5-7697630da7a5",
+                            "id": "d0ced0dd-ed44-4ceb-a0e4-eaf4a9f5c6ed",
                             "name": "Invalid request body or parameters (e.g. malformed JSON, missing required field)",
                             "originalRequest": {
                                 "url": {
@@ -275,7 +275,7 @@
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "588557cb-70f6-4030-92b1-9aba54968834",
+                            "id": "758d6910-ed4c-4f9d-8ece-357bffc03fdd",
                             "name": "Missing, malformed, or revoked API key",
                             "originalRequest": {
                                 "url": {
@@ -342,7 +342,7 @@
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "db6f7f07-c5b6-45b4-acd5-a2d62cffa0d6",
+                            "id": "b698a801-53e6-4e65-9755-ccc2fb25ee2d",
                             "name": "Request was syntactically valid but semantically wrong (e.g. unreachable resume URL)",
                             "originalRequest": {
                                 "url": {
@@ -409,7 +409,7 @@
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "7e7f65f2-7a22-4541-b6bc-10920c134287",
+                            "id": "f7fca737-49c6-4242-8270-2ddb881064c8",
                             "name": "Rate limit exceeded (100 req/min/key)",
                             "originalRequest": {
                                 "url": {
@@ -512,7 +512,7 @@
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "25168c02-4030-4952-85e0-e3426aff6c02",
+                            "id": "021b2400-6b08-4e5e-9274-ae0205134caa",
                             "name": "Claude returned content that failed Zod validation even after retry",
                             "originalRequest": {
                                 "url": {
@@ -579,7 +579,7 @@
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "14b44a19-2e0c-449b-89b2-8701be7157b2",
+                            "id": "13099340-28ba-4b45-9ca5-7b05780be345",
                             "name": "Upstream dependency unavailable (Anthropic, Postgres)",
                             "originalRequest": {
                                 "url": {
@@ -658,7 +658,7 @@
             "description": "Persistent person records keyed by your external_id",
             "item": [
                 {
-                    "id": "df03cb43-056e-4636-9803-9f073c025903",
+                    "id": "b36ed61b-dfb2-4e94-82a6-6ef7c41f090e",
                     "name": "Upsert a candidate by external_id",
                     "request": {
                         "name": "Upsert a candidate by external_id",
@@ -699,7 +699,7 @@
                         "method": "POST",
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n  \"external_id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"amet_e\": \"consequat in\"\n  }\n}",
+                            "raw": "{\n  \"external_id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"nostrud_6\": -70836021.48136944,\n    \"nisi_7f\": -93093340.21338934\n  }\n}",
                             "options": {
                                 "raw": {
                                     "headerFamily": "json",
@@ -711,7 +711,7 @@
                     },
                     "response": [
                         {
-                            "id": "2bd42af9-18e7-4c54-85b3-caddf5c0649b",
+                            "id": "582d6bdc-eabe-4e6c-abd2-32cc868585f9",
                             "name": "Upserted Candidate",
                             "originalRequest": {
                                 "url": {
@@ -755,7 +755,7 @@
                                 "method": "POST",
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n  \"external_id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"amet_e\": \"consequat in\"\n  }\n}",
+                                    "raw": "{\n  \"external_id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"nostrud_6\": -70836021.48136944,\n    \"nisi_7f\": -93093340.21338934\n  }\n}",
                                     "options": {
                                         "raw": {
                                             "headerFamily": "json",
@@ -772,12 +772,12 @@
                                     "value": "application/json"
                                 }
                             ],
-                            "body": "{\n  \"id\": \"cand_\",\n  \"workspace_id\": \"ws_\",\n  \"external_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"name\": \"<string>\",\n    \"current_title\": \"<string>\",\n    \"skills\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total\": \"<number>\",\n    \"experience\": [\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"1657-19\",\n        \"end\": \"2700-88\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"4257-18\",\n        \"end\": \"8578-49\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"education\": [\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_2\"\n      },\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_3\"\n      }\n    ],\n    \"ai_ml\": {\n      \"ai_ml_years\": \"<number>\",\n      \"ai_ml_years_evidence\": \"<string>\",\n      \"domain_specializations\": [\n        \"Speech\",\n        \"Computer Vision\"\n      ],\n      \"frameworks_proficient\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"has_llm_experience\": \"<boolean>\",\n      \"llm_evidence\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"ats\": {\n      \"score\": \"<integer>\",\n      \"breakdown\": {\n        \"keywords\": \"<integer>\",\n        \"structure\": \"<integer>\",\n        \"action_verbs\": \"<integer>\",\n        \"quantified_achievements\": \"<integer>\",\n        \"format\": \"<integer>\"\n      },\n      \"score_rationale\": \"<string>\",\n      \"issues\": [\n        {\n          \"category\": \"keywords\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        },\n        {\n          \"category\": \"format\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        }\n      ]\n    },\n    \"summary\": \"<string>\",\n    \"strengths\": [\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      },\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      }\n    ],\n    \"gaps\": [\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"CRITICAL\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"HIGH\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      }\n    ],\n    \"confidence\": {\n      \"overall\": \"<number>\",\n      \"identity\": \"<number>\",\n      \"experience\": \"<number>\",\n      \"education\": \"<number>\",\n      \"ats\": \"<number>\",\n      \"ai_ml\": \"<number>\",\n      \"compensation\": \"<number>\"\n    },\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"github_url\": \"<string>\",\n    \"portfolio_url\": \"<string>\",\n    \"target_title\": \"<string>\",\n    \"experience_level\": \"Mid\",\n    \"seniority_ladder_position\": \"<string>\",\n    \"skill_clusters\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total_evidence\": \"<string>\",\n    \"compensation\": {\n      \"current_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"annual\"\n      },\n      \"expected_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"annual\"\n      },\n      \"notice_period_days\": \"<integer>\",\n      \"evidence\": \"<string>\"\n    },\n    \"low_confidence_reasons\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                            "body": "{\n  \"id\": \"cand_\",\n  \"workspace_id\": \"ws_\",\n  \"external_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"name\": \"<string>\",\n    \"current_title\": \"<string>\",\n    \"skills\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total\": \"<number>\",\n    \"experience\": [\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"7060-14\",\n        \"end\": \"0304-50\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"5063-03\",\n        \"end\": \"2166-59\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"education\": [\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_2\"\n      },\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_3\"\n      }\n    ],\n    \"ai_ml\": {\n      \"ai_ml_years\": \"<number>\",\n      \"ai_ml_years_evidence\": \"<string>\",\n      \"domain_specializations\": [\n        \"Recommendations\",\n        \"Fraud/Anomaly\"\n      ],\n      \"frameworks_proficient\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"has_llm_experience\": \"<boolean>\",\n      \"llm_evidence\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"ats\": {\n      \"score\": \"<integer>\",\n      \"breakdown\": {\n        \"keywords\": \"<integer>\",\n        \"structure\": \"<integer>\",\n        \"action_verbs\": \"<integer>\",\n        \"quantified_achievements\": \"<integer>\",\n        \"format\": \"<integer>\"\n      },\n      \"score_rationale\": \"<string>\",\n      \"issues\": [\n        {\n          \"category\": \"quantified_achievements\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        },\n        {\n          \"category\": \"contact_info\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        }\n      ]\n    },\n    \"summary\": \"<string>\",\n    \"strengths\": [\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      },\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      }\n    ],\n    \"gaps\": [\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"MEDIUM\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"HIGH\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      }\n    ],\n    \"confidence\": {\n      \"overall\": \"<number>\",\n      \"identity\": \"<number>\",\n      \"experience\": \"<number>\",\n      \"education\": \"<number>\",\n      \"ats\": \"<number>\",\n      \"ai_ml\": \"<number>\",\n      \"compensation\": \"<number>\"\n    },\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"github_url\": \"<string>\",\n    \"portfolio_url\": \"<string>\",\n    \"target_title\": \"<string>\",\n    \"experience_level\": \"Principal\",\n    \"seniority_ladder_position\": \"<string>\",\n    \"skill_clusters\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total_evidence\": \"<string>\",\n    \"compensation\": {\n      \"current_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"annual\"\n      },\n      \"expected_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"hourly\"\n      },\n      \"notice_period_days\": \"<integer>\",\n      \"evidence\": \"<string>\"\n    },\n    \"low_confidence_reasons\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
                             "cookie": [],
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "0558037d-bb73-4564-8239-0b5590b0b448",
+                            "id": "474da51c-a045-4612-acbb-ea4455d38061",
                             "name": "Invalid request body or parameters (e.g. malformed JSON, missing required field)",
                             "originalRequest": {
                                 "url": {
@@ -821,7 +821,7 @@
                                 "method": "POST",
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n  \"external_id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"amet_e\": \"consequat in\"\n  }\n}",
+                                    "raw": "{\n  \"external_id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"nostrud_6\": -70836021.48136944,\n    \"nisi_7f\": -93093340.21338934\n  }\n}",
                                     "options": {
                                         "raw": {
                                             "headerFamily": "json",
@@ -843,7 +843,7 @@
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "852b67bc-b527-46da-a715-7585f4a8ec2c",
+                            "id": "31537e86-3203-474b-8837-4dd4e33c2d7e",
                             "name": "Missing, malformed, or revoked API key",
                             "originalRequest": {
                                 "url": {
@@ -887,7 +887,7 @@
                                 "method": "POST",
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n  \"external_id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"amet_e\": \"consequat in\"\n  }\n}",
+                                    "raw": "{\n  \"external_id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"nostrud_6\": -70836021.48136944,\n    \"nisi_7f\": -93093340.21338934\n  }\n}",
                                     "options": {
                                         "raw": {
                                             "headerFamily": "json",
@@ -915,7 +915,7 @@
                     }
                 },
                 {
-                    "id": "20c75cc4-b76d-44c3-a160-b00a3d729a05",
+                    "id": "aa3b4a9d-ae06-4467-af85-135b0dafb660",
                     "name": "List candidates (cursor-paginated)",
                     "request": {
                         "name": "List candidates (cursor-paginated)",
@@ -962,7 +962,7 @@
                     },
                     "response": [
                         {
-                            "id": "04bd463f-f6a6-4e2b-9d7a-0a7acd3eae2d",
+                            "id": "e98482c4-71cf-463b-9860-fccd73cf3f58",
                             "name": "Page of Candidates",
                             "originalRequest": {
                                 "url": {
@@ -1020,7 +1020,7 @@
                                     "value": "application/json"
                                 }
                             ],
-                            "body": "{\n  \"items\": [\n    {\n      \"id\": \"cand_\",\n      \"workspace_id\": \"ws_\",\n      \"external_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"profile\": {\n        \"name\": \"<string>\",\n        \"current_title\": \"<string>\",\n        \"skills\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"years_total\": \"<number>\",\n        \"experience\": [\n          {\n            \"title\": \"<string>\",\n            \"company\": \"<string>\",\n            \"start\": \"1776-59\",\n            \"end\": \"9125-17\",\n            \"summary\": \"<string>\",\n            \"tech_stack\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"quantified_achievements\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"title\": \"<string>\",\n            \"company\": \"<string>\",\n            \"start\": \"5238-52\",\n            \"end\": \"4677-77\",\n            \"summary\": \"<string>\",\n            \"tech_stack\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"quantified_achievements\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ],\n        \"education\": [\n          {\n            \"degree\": \"<string>\",\n            \"institution\": \"<string>\",\n            \"year\": \"<integer>\",\n            \"gpa\": \"<number>\",\n            \"specialization\": \"<string>\",\n            \"institution_tier\": \"unranked\"\n          },\n          {\n            \"degree\": \"<string>\",\n            \"institution\": \"<string>\",\n            \"year\": \"<integer>\",\n            \"gpa\": \"<number>\",\n            \"specialization\": \"<string>\",\n            \"institution_tier\": \"unranked\"\n          }\n        ],\n        \"ai_ml\": {\n          \"ai_ml_years\": \"<number>\",\n          \"ai_ml_years_evidence\": \"<string>\",\n          \"domain_specializations\": [\n            \"Search/Retrieval\",\n            \"Recommendations\"\n          ],\n          \"frameworks_proficient\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"has_llm_experience\": \"<boolean>\",\n          \"llm_evidence\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"ats\": {\n          \"score\": \"<integer>\",\n          \"breakdown\": {\n            \"keywords\": \"<integer>\",\n            \"structure\": \"<integer>\",\n            \"action_verbs\": \"<integer>\",\n            \"quantified_achievements\": \"<integer>\",\n            \"format\": \"<integer>\"\n          },\n          \"score_rationale\": \"<string>\",\n          \"issues\": [\n            {\n              \"category\": \"action_verbs\",\n              \"issue\": \"<string>\",\n              \"before\": \"<string>\",\n              \"after\": \"<string>\"\n            },\n            {\n              \"category\": \"structure\",\n              \"issue\": \"<string>\",\n              \"before\": \"<string>\",\n              \"after\": \"<string>\"\n            }\n          ]\n        },\n        \"summary\": \"<string>\",\n        \"strengths\": [\n          {\n            \"strength\": \"<string>\",\n            \"evidence\": \"<string>\"\n          },\n          {\n            \"strength\": \"<string>\",\n            \"evidence\": \"<string>\"\n          }\n        ],\n        \"gaps\": [\n          {\n            \"name\": \"<string>\",\n            \"severity\": \"MEDIUM\",\n            \"market_reason\": \"<string>\",\n            \"time_to_close\": \"<string>\",\n            \"resource\": \"<string>\",\n            \"resource_url\": \"<string>\",\n            \"cost\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"severity\": \"CRITICAL\",\n            \"market_reason\": \"<string>\",\n            \"time_to_close\": \"<string>\",\n            \"resource\": \"<string>\",\n            \"resource_url\": \"<string>\",\n            \"cost\": \"<string>\"\n          }\n        ],\n        \"confidence\": {\n          \"overall\": \"<number>\",\n          \"identity\": \"<number>\",\n          \"experience\": \"<number>\",\n          \"education\": \"<number>\",\n          \"ats\": \"<number>\",\n          \"ai_ml\": \"<number>\",\n          \"compensation\": \"<number>\"\n        },\n        \"email\": \"<email>\",\n        \"phone\": \"<string>\",\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"linkedin_url\": \"<string>\",\n        \"github_url\": \"<string>\",\n        \"portfolio_url\": \"<string>\",\n        \"target_title\": \"<string>\",\n        \"experience_level\": \"Mid\",\n        \"seniority_ladder_position\": \"<string>\",\n        \"skill_clusters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"years_total_evidence\": \"<string>\",\n        \"compensation\": {\n          \"current_ctc\": {\n            \"value\": \"<number>\",\n            \"currency\": \"<string>\",\n            \"period\": \"monthly\"\n          },\n          \"expected_ctc\": {\n            \"value\": \"<number>\",\n            \"currency\": \"<string>\",\n            \"period\": \"monthly\"\n          },\n          \"notice_period_days\": \"<integer>\",\n          \"evidence\": \"<string>\"\n        },\n        \"low_confidence_reasons\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"id\": \"cand_\",\n      \"workspace_id\": \"ws_\",\n      \"external_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"profile\": {\n        \"name\": \"<string>\",\n        \"current_title\": \"<string>\",\n        \"skills\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"years_total\": \"<number>\",\n        \"experience\": [\n          {\n            \"title\": \"<string>\",\n            \"company\": \"<string>\",\n            \"start\": \"7749-33\",\n            \"end\": \"5659-64\",\n            \"summary\": \"<string>\",\n            \"tech_stack\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"quantified_achievements\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"title\": \"<string>\",\n            \"company\": \"<string>\",\n            \"start\": \"3003-75\",\n            \"end\": \"0758-93\",\n            \"summary\": \"<string>\",\n            \"tech_stack\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"quantified_achievements\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ],\n        \"education\": [\n          {\n            \"degree\": \"<string>\",\n            \"institution\": \"<string>\",\n            \"year\": \"<integer>\",\n            \"gpa\": \"<number>\",\n            \"specialization\": \"<string>\",\n            \"institution_tier\": \"tier_2\"\n          },\n          {\n            \"degree\": \"<string>\",\n            \"institution\": \"<string>\",\n            \"year\": \"<integer>\",\n            \"gpa\": \"<number>\",\n            \"specialization\": \"<string>\",\n            \"institution_tier\": \"tier_2\"\n          }\n        ],\n        \"ai_ml\": {\n          \"ai_ml_years\": \"<number>\",\n          \"ai_ml_years_evidence\": \"<string>\",\n          \"domain_specializations\": [\n            \"Fraud/Anomaly\",\n            \"GenAI/LLMs\"\n          ],\n          \"frameworks_proficient\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"has_llm_experience\": \"<boolean>\",\n          \"llm_evidence\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"ats\": {\n          \"score\": \"<integer>\",\n          \"breakdown\": {\n            \"keywords\": \"<integer>\",\n            \"structure\": \"<integer>\",\n            \"action_verbs\": \"<integer>\",\n            \"quantified_achievements\": \"<integer>\",\n            \"format\": \"<integer>\"\n          },\n          \"score_rationale\": \"<string>\",\n          \"issues\": [\n            {\n              \"category\": \"action_verbs\",\n              \"issue\": \"<string>\",\n              \"before\": \"<string>\",\n              \"after\": \"<string>\"\n            },\n            {\n              \"category\": \"structure\",\n              \"issue\": \"<string>\",\n              \"before\": \"<string>\",\n              \"after\": \"<string>\"\n            }\n          ]\n        },\n        \"summary\": \"<string>\",\n        \"strengths\": [\n          {\n            \"strength\": \"<string>\",\n            \"evidence\": \"<string>\"\n          },\n          {\n            \"strength\": \"<string>\",\n            \"evidence\": \"<string>\"\n          }\n        ],\n        \"gaps\": [\n          {\n            \"name\": \"<string>\",\n            \"severity\": \"HIGH\",\n            \"market_reason\": \"<string>\",\n            \"time_to_close\": \"<string>\",\n            \"resource\": \"<string>\",\n            \"resource_url\": \"<string>\",\n            \"cost\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"severity\": \"HIGH\",\n            \"market_reason\": \"<string>\",\n            \"time_to_close\": \"<string>\",\n            \"resource\": \"<string>\",\n            \"resource_url\": \"<string>\",\n            \"cost\": \"<string>\"\n          }\n        ],\n        \"confidence\": {\n          \"overall\": \"<number>\",\n          \"identity\": \"<number>\",\n          \"experience\": \"<number>\",\n          \"education\": \"<number>\",\n          \"ats\": \"<number>\",\n          \"ai_ml\": \"<number>\",\n          \"compensation\": \"<number>\"\n        },\n        \"email\": \"<email>\",\n        \"phone\": \"<string>\",\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"linkedin_url\": \"<string>\",\n        \"github_url\": \"<string>\",\n        \"portfolio_url\": \"<string>\",\n        \"target_title\": \"<string>\",\n        \"experience_level\": \"Principal\",\n        \"seniority_ladder_position\": \"<string>\",\n        \"skill_clusters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"years_total_evidence\": \"<string>\",\n        \"compensation\": {\n          \"current_ctc\": {\n            \"value\": \"<number>\",\n            \"currency\": \"<string>\",\n            \"period\": \"monthly\"\n          },\n          \"expected_ctc\": {\n            \"value\": \"<number>\",\n            \"currency\": \"<string>\",\n            \"period\": \"annual\"\n          },\n          \"notice_period_days\": \"<integer>\",\n          \"evidence\": \"<string>\"\n        },\n        \"low_confidence_reasons\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"has_more\": \"<boolean>\",\n  \"next_cursor\": \"<string>\"\n}",
+                            "body": "{\n  \"items\": [\n    {\n      \"id\": \"cand_\",\n      \"workspace_id\": \"ws_\",\n      \"external_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"profile\": {\n        \"name\": \"<string>\",\n        \"current_title\": \"<string>\",\n        \"skills\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"years_total\": \"<number>\",\n        \"experience\": [\n          {\n            \"title\": \"<string>\",\n            \"company\": \"<string>\",\n            \"start\": \"1432-75\",\n            \"end\": \"7232-64\",\n            \"summary\": \"<string>\",\n            \"tech_stack\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"quantified_achievements\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"title\": \"<string>\",\n            \"company\": \"<string>\",\n            \"start\": \"9542-76\",\n            \"end\": \"1104-28\",\n            \"summary\": \"<string>\",\n            \"tech_stack\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"quantified_achievements\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ],\n        \"education\": [\n          {\n            \"degree\": \"<string>\",\n            \"institution\": \"<string>\",\n            \"year\": \"<integer>\",\n            \"gpa\": \"<number>\",\n            \"specialization\": \"<string>\",\n            \"institution_tier\": \"tier_1\"\n          },\n          {\n            \"degree\": \"<string>\",\n            \"institution\": \"<string>\",\n            \"year\": \"<integer>\",\n            \"gpa\": \"<number>\",\n            \"specialization\": \"<string>\",\n            \"institution_tier\": \"tier_1\"\n          }\n        ],\n        \"ai_ml\": {\n          \"ai_ml_years\": \"<number>\",\n          \"ai_ml_years_evidence\": \"<string>\",\n          \"domain_specializations\": [\n            \"Time Series\",\n            \"GenAI/LLMs\"\n          ],\n          \"frameworks_proficient\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"has_llm_experience\": \"<boolean>\",\n          \"llm_evidence\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"ats\": {\n          \"score\": \"<integer>\",\n          \"breakdown\": {\n            \"keywords\": \"<integer>\",\n            \"structure\": \"<integer>\",\n            \"action_verbs\": \"<integer>\",\n            \"quantified_achievements\": \"<integer>\",\n            \"format\": \"<integer>\"\n          },\n          \"score_rationale\": \"<string>\",\n          \"issues\": [\n            {\n              \"category\": \"contact_info\",\n              \"issue\": \"<string>\",\n              \"before\": \"<string>\",\n              \"after\": \"<string>\"\n            },\n            {\n              \"category\": \"action_verbs\",\n              \"issue\": \"<string>\",\n              \"before\": \"<string>\",\n              \"after\": \"<string>\"\n            }\n          ]\n        },\n        \"summary\": \"<string>\",\n        \"strengths\": [\n          {\n            \"strength\": \"<string>\",\n            \"evidence\": \"<string>\"\n          },\n          {\n            \"strength\": \"<string>\",\n            \"evidence\": \"<string>\"\n          }\n        ],\n        \"gaps\": [\n          {\n            \"name\": \"<string>\",\n            \"severity\": \"HIGH\",\n            \"market_reason\": \"<string>\",\n            \"time_to_close\": \"<string>\",\n            \"resource\": \"<string>\",\n            \"resource_url\": \"<string>\",\n            \"cost\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"severity\": \"HIGH\",\n            \"market_reason\": \"<string>\",\n            \"time_to_close\": \"<string>\",\n            \"resource\": \"<string>\",\n            \"resource_url\": \"<string>\",\n            \"cost\": \"<string>\"\n          }\n        ],\n        \"confidence\": {\n          \"overall\": \"<number>\",\n          \"identity\": \"<number>\",\n          \"experience\": \"<number>\",\n          \"education\": \"<number>\",\n          \"ats\": \"<number>\",\n          \"ai_ml\": \"<number>\",\n          \"compensation\": \"<number>\"\n        },\n        \"email\": \"<email>\",\n        \"phone\": \"<string>\",\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"linkedin_url\": \"<string>\",\n        \"github_url\": \"<string>\",\n        \"portfolio_url\": \"<string>\",\n        \"target_title\": \"<string>\",\n        \"experience_level\": \"Senior\",\n        \"seniority_ladder_position\": \"<string>\",\n        \"skill_clusters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"years_total_evidence\": \"<string>\",\n        \"compensation\": {\n          \"current_ctc\": {\n            \"value\": \"<number>\",\n            \"currency\": \"<string>\",\n            \"period\": \"hourly\"\n          },\n          \"expected_ctc\": {\n            \"value\": \"<number>\",\n            \"currency\": \"<string>\",\n            \"period\": \"annual\"\n          },\n          \"notice_period_days\": \"<integer>\",\n          \"evidence\": \"<string>\"\n        },\n        \"low_confidence_reasons\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"id\": \"cand_\",\n      \"workspace_id\": \"ws_\",\n      \"external_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"profile\": {\n        \"name\": \"<string>\",\n        \"current_title\": \"<string>\",\n        \"skills\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"years_total\": \"<number>\",\n        \"experience\": [\n          {\n            \"title\": \"<string>\",\n            \"company\": \"<string>\",\n            \"start\": \"9784-09\",\n            \"end\": \"3416-17\",\n            \"summary\": \"<string>\",\n            \"tech_stack\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"quantified_achievements\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"title\": \"<string>\",\n            \"company\": \"<string>\",\n            \"start\": \"3829-05\",\n            \"end\": \"4258-31\",\n            \"summary\": \"<string>\",\n            \"tech_stack\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"quantified_achievements\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ],\n        \"education\": [\n          {\n            \"degree\": \"<string>\",\n            \"institution\": \"<string>\",\n            \"year\": \"<integer>\",\n            \"gpa\": \"<number>\",\n            \"specialization\": \"<string>\",\n            \"institution_tier\": \"tier_2\"\n          },\n          {\n            \"degree\": \"<string>\",\n            \"institution\": \"<string>\",\n            \"year\": \"<integer>\",\n            \"gpa\": \"<number>\",\n            \"specialization\": \"<string>\",\n            \"institution_tier\": \"tier_1\"\n          }\n        ],\n        \"ai_ml\": {\n          \"ai_ml_years\": \"<number>\",\n          \"ai_ml_years_evidence\": \"<string>\",\n          \"domain_specializations\": [\n            \"Recommendations\",\n            \"Speech\"\n          ],\n          \"frameworks_proficient\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"has_llm_experience\": \"<boolean>\",\n          \"llm_evidence\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"ats\": {\n          \"score\": \"<integer>\",\n          \"breakdown\": {\n            \"keywords\": \"<integer>\",\n            \"structure\": \"<integer>\",\n            \"action_verbs\": \"<integer>\",\n            \"quantified_achievements\": \"<integer>\",\n            \"format\": \"<integer>\"\n          },\n          \"score_rationale\": \"<string>\",\n          \"issues\": [\n            {\n              \"category\": \"action_verbs\",\n              \"issue\": \"<string>\",\n              \"before\": \"<string>\",\n              \"after\": \"<string>\"\n            },\n            {\n              \"category\": \"format\",\n              \"issue\": \"<string>\",\n              \"before\": \"<string>\",\n              \"after\": \"<string>\"\n            }\n          ]\n        },\n        \"summary\": \"<string>\",\n        \"strengths\": [\n          {\n            \"strength\": \"<string>\",\n            \"evidence\": \"<string>\"\n          },\n          {\n            \"strength\": \"<string>\",\n            \"evidence\": \"<string>\"\n          }\n        ],\n        \"gaps\": [\n          {\n            \"name\": \"<string>\",\n            \"severity\": \"MEDIUM\",\n            \"market_reason\": \"<string>\",\n            \"time_to_close\": \"<string>\",\n            \"resource\": \"<string>\",\n            \"resource_url\": \"<string>\",\n            \"cost\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"severity\": \"HIGH\",\n            \"market_reason\": \"<string>\",\n            \"time_to_close\": \"<string>\",\n            \"resource\": \"<string>\",\n            \"resource_url\": \"<string>\",\n            \"cost\": \"<string>\"\n          }\n        ],\n        \"confidence\": {\n          \"overall\": \"<number>\",\n          \"identity\": \"<number>\",\n          \"experience\": \"<number>\",\n          \"education\": \"<number>\",\n          \"ats\": \"<number>\",\n          \"ai_ml\": \"<number>\",\n          \"compensation\": \"<number>\"\n        },\n        \"email\": \"<email>\",\n        \"phone\": \"<string>\",\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"linkedin_url\": \"<string>\",\n        \"github_url\": \"<string>\",\n        \"portfolio_url\": \"<string>\",\n        \"target_title\": \"<string>\",\n        \"experience_level\": \"Principal\",\n        \"seniority_ladder_position\": \"<string>\",\n        \"skill_clusters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"years_total_evidence\": \"<string>\",\n        \"compensation\": {\n          \"current_ctc\": {\n            \"value\": \"<number>\",\n            \"currency\": \"<string>\",\n            \"period\": \"annual\"\n          },\n          \"expected_ctc\": {\n            \"value\": \"<number>\",\n            \"currency\": \"<string>\",\n            \"period\": \"hourly\"\n          },\n          \"notice_period_days\": \"<integer>\",\n          \"evidence\": \"<string>\"\n        },\n        \"low_confidence_reasons\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"has_more\": \"<boolean>\",\n  \"next_cursor\": \"<string>\"\n}",
                             "cookie": [],
                             "_postman_previewlanguage": "json"
                         }
@@ -1031,7 +1031,7 @@
                     }
                 },
                 {
-                    "id": "0b9b8265-f74b-4b29-b0b8-5858a2659c1c",
+                    "id": "c5216916-7961-4ed8-b3d4-2287ea73bdb4",
                     "name": "Get a candidate by id",
                     "request": {
                         "name": "Get a candidate by id",
@@ -1071,7 +1071,7 @@
                     },
                     "response": [
                         {
-                            "id": "7aff885a-3ea7-4d44-88c4-9f71f63f476e",
+                            "id": "c9b4d560-4fe9-45ed-bc1d-d2d1c12401f2",
                             "name": "Candidate",
                             "originalRequest": {
                                 "url": {
@@ -1111,12 +1111,12 @@
                                     "value": "application/json"
                                 }
                             ],
-                            "body": "{\n  \"id\": \"cand_\",\n  \"workspace_id\": \"ws_\",\n  \"external_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"name\": \"<string>\",\n    \"current_title\": \"<string>\",\n    \"skills\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total\": \"<number>\",\n    \"experience\": [\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"1657-19\",\n        \"end\": \"2700-88\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"4257-18\",\n        \"end\": \"8578-49\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"education\": [\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_2\"\n      },\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_3\"\n      }\n    ],\n    \"ai_ml\": {\n      \"ai_ml_years\": \"<number>\",\n      \"ai_ml_years_evidence\": \"<string>\",\n      \"domain_specializations\": [\n        \"Speech\",\n        \"Computer Vision\"\n      ],\n      \"frameworks_proficient\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"has_llm_experience\": \"<boolean>\",\n      \"llm_evidence\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"ats\": {\n      \"score\": \"<integer>\",\n      \"breakdown\": {\n        \"keywords\": \"<integer>\",\n        \"structure\": \"<integer>\",\n        \"action_verbs\": \"<integer>\",\n        \"quantified_achievements\": \"<integer>\",\n        \"format\": \"<integer>\"\n      },\n      \"score_rationale\": \"<string>\",\n      \"issues\": [\n        {\n          \"category\": \"keywords\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        },\n        {\n          \"category\": \"format\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        }\n      ]\n    },\n    \"summary\": \"<string>\",\n    \"strengths\": [\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      },\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      }\n    ],\n    \"gaps\": [\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"CRITICAL\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"HIGH\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      }\n    ],\n    \"confidence\": {\n      \"overall\": \"<number>\",\n      \"identity\": \"<number>\",\n      \"experience\": \"<number>\",\n      \"education\": \"<number>\",\n      \"ats\": \"<number>\",\n      \"ai_ml\": \"<number>\",\n      \"compensation\": \"<number>\"\n    },\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"github_url\": \"<string>\",\n    \"portfolio_url\": \"<string>\",\n    \"target_title\": \"<string>\",\n    \"experience_level\": \"Mid\",\n    \"seniority_ladder_position\": \"<string>\",\n    \"skill_clusters\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total_evidence\": \"<string>\",\n    \"compensation\": {\n      \"current_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"annual\"\n      },\n      \"expected_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"annual\"\n      },\n      \"notice_period_days\": \"<integer>\",\n      \"evidence\": \"<string>\"\n    },\n    \"low_confidence_reasons\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                            "body": "{\n  \"id\": \"cand_\",\n  \"workspace_id\": \"ws_\",\n  \"external_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"name\": \"<string>\",\n    \"current_title\": \"<string>\",\n    \"skills\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total\": \"<number>\",\n    \"experience\": [\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"7060-14\",\n        \"end\": \"0304-50\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"5063-03\",\n        \"end\": \"2166-59\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"education\": [\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_2\"\n      },\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_3\"\n      }\n    ],\n    \"ai_ml\": {\n      \"ai_ml_years\": \"<number>\",\n      \"ai_ml_years_evidence\": \"<string>\",\n      \"domain_specializations\": [\n        \"Recommendations\",\n        \"Fraud/Anomaly\"\n      ],\n      \"frameworks_proficient\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"has_llm_experience\": \"<boolean>\",\n      \"llm_evidence\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"ats\": {\n      \"score\": \"<integer>\",\n      \"breakdown\": {\n        \"keywords\": \"<integer>\",\n        \"structure\": \"<integer>\",\n        \"action_verbs\": \"<integer>\",\n        \"quantified_achievements\": \"<integer>\",\n        \"format\": \"<integer>\"\n      },\n      \"score_rationale\": \"<string>\",\n      \"issues\": [\n        {\n          \"category\": \"quantified_achievements\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        },\n        {\n          \"category\": \"contact_info\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        }\n      ]\n    },\n    \"summary\": \"<string>\",\n    \"strengths\": [\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      },\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      }\n    ],\n    \"gaps\": [\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"MEDIUM\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"HIGH\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      }\n    ],\n    \"confidence\": {\n      \"overall\": \"<number>\",\n      \"identity\": \"<number>\",\n      \"experience\": \"<number>\",\n      \"education\": \"<number>\",\n      \"ats\": \"<number>\",\n      \"ai_ml\": \"<number>\",\n      \"compensation\": \"<number>\"\n    },\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"github_url\": \"<string>\",\n    \"portfolio_url\": \"<string>\",\n    \"target_title\": \"<string>\",\n    \"experience_level\": \"Principal\",\n    \"seniority_ladder_position\": \"<string>\",\n    \"skill_clusters\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total_evidence\": \"<string>\",\n    \"compensation\": {\n      \"current_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"annual\"\n      },\n      \"expected_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"hourly\"\n      },\n      \"notice_period_days\": \"<integer>\",\n      \"evidence\": \"<string>\"\n    },\n    \"low_confidence_reasons\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
                             "cookie": [],
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "2f872ca0-fc61-462a-add5-fe9cbf2972e4",
+                            "id": "f50a08f3-a7bb-4bb0-aba1-e531e6ed4818",
                             "name": "Resource does not exist or is not in this workspace",
                             "originalRequest": {
                                 "url": {
@@ -1167,7 +1167,7 @@
                     }
                 },
                 {
-                    "id": "91d39645-a7f9-4de3-8a78-cca5cc97bfde",
+                    "id": "fb4e85db-8f21-40f4-8ada-334a3109e1cc",
                     "name": "Partial update — currently feed_preferences only",
                     "request": {
                         "name": "Partial update — currently feed_preferences only",
@@ -1211,7 +1211,7 @@
                         "method": "PATCH",
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n  \"feed_preferences\": {\n    \"topics\": [\n      \"papers\",\n      \"papers\"\n    ],\n    \"domains\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_include\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_exclude\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"paused\": \"<boolean>\"\n  }\n}",
+                            "raw": "{\n  \"feed_preferences\": {\n    \"topics\": [\n      \"models\",\n      \"benchmarks\"\n    ],\n    \"domains\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_include\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_exclude\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"paused\": \"<boolean>\"\n  }\n}",
                             "options": {
                                 "raw": {
                                     "headerFamily": "json",
@@ -1223,7 +1223,7 @@
                     },
                     "response": [
                         {
-                            "id": "ffbe6831-cfc5-4220-bfad-8827828b3158",
+                            "id": "ecf37db0-d6d7-42c7-9125-51e7844e6f5a",
                             "name": "Candidate (with new feed_preferences)",
                             "originalRequest": {
                                 "url": {
@@ -1259,7 +1259,7 @@
                                 "method": "PATCH",
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n  \"feed_preferences\": {\n    \"topics\": [\n      \"papers\",\n      \"papers\"\n    ],\n    \"domains\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_include\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_exclude\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"paused\": \"<boolean>\"\n  }\n}",
+                                    "raw": "{\n  \"feed_preferences\": {\n    \"topics\": [\n      \"models\",\n      \"benchmarks\"\n    ],\n    \"domains\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_include\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_exclude\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"paused\": \"<boolean>\"\n  }\n}",
                                     "options": {
                                         "raw": {
                                             "headerFamily": "json",
@@ -1276,12 +1276,12 @@
                                     "value": "application/json"
                                 }
                             ],
-                            "body": "{\n  \"id\": \"cand_\",\n  \"workspace_id\": \"ws_\",\n  \"external_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"name\": \"<string>\",\n    \"current_title\": \"<string>\",\n    \"skills\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total\": \"<number>\",\n    \"experience\": [\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"1657-19\",\n        \"end\": \"2700-88\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"4257-18\",\n        \"end\": \"8578-49\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"education\": [\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_2\"\n      },\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_3\"\n      }\n    ],\n    \"ai_ml\": {\n      \"ai_ml_years\": \"<number>\",\n      \"ai_ml_years_evidence\": \"<string>\",\n      \"domain_specializations\": [\n        \"Speech\",\n        \"Computer Vision\"\n      ],\n      \"frameworks_proficient\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"has_llm_experience\": \"<boolean>\",\n      \"llm_evidence\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"ats\": {\n      \"score\": \"<integer>\",\n      \"breakdown\": {\n        \"keywords\": \"<integer>\",\n        \"structure\": \"<integer>\",\n        \"action_verbs\": \"<integer>\",\n        \"quantified_achievements\": \"<integer>\",\n        \"format\": \"<integer>\"\n      },\n      \"score_rationale\": \"<string>\",\n      \"issues\": [\n        {\n          \"category\": \"keywords\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        },\n        {\n          \"category\": \"format\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        }\n      ]\n    },\n    \"summary\": \"<string>\",\n    \"strengths\": [\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      },\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      }\n    ],\n    \"gaps\": [\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"CRITICAL\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"HIGH\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      }\n    ],\n    \"confidence\": {\n      \"overall\": \"<number>\",\n      \"identity\": \"<number>\",\n      \"experience\": \"<number>\",\n      \"education\": \"<number>\",\n      \"ats\": \"<number>\",\n      \"ai_ml\": \"<number>\",\n      \"compensation\": \"<number>\"\n    },\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"github_url\": \"<string>\",\n    \"portfolio_url\": \"<string>\",\n    \"target_title\": \"<string>\",\n    \"experience_level\": \"Mid\",\n    \"seniority_ladder_position\": \"<string>\",\n    \"skill_clusters\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total_evidence\": \"<string>\",\n    \"compensation\": {\n      \"current_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"annual\"\n      },\n      \"expected_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"annual\"\n      },\n      \"notice_period_days\": \"<integer>\",\n      \"evidence\": \"<string>\"\n    },\n    \"low_confidence_reasons\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                            "body": "{\n  \"id\": \"cand_\",\n  \"workspace_id\": \"ws_\",\n  \"external_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"profile\": {\n    \"name\": \"<string>\",\n    \"current_title\": \"<string>\",\n    \"skills\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total\": \"<number>\",\n    \"experience\": [\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"7060-14\",\n        \"end\": \"0304-50\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"title\": \"<string>\",\n        \"company\": \"<string>\",\n        \"start\": \"5063-03\",\n        \"end\": \"2166-59\",\n        \"summary\": \"<string>\",\n        \"tech_stack\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"quantified_achievements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"education\": [\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_2\"\n      },\n      {\n        \"degree\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"year\": \"<integer>\",\n        \"gpa\": \"<number>\",\n        \"specialization\": \"<string>\",\n        \"institution_tier\": \"tier_3\"\n      }\n    ],\n    \"ai_ml\": {\n      \"ai_ml_years\": \"<number>\",\n      \"ai_ml_years_evidence\": \"<string>\",\n      \"domain_specializations\": [\n        \"Recommendations\",\n        \"Fraud/Anomaly\"\n      ],\n      \"frameworks_proficient\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"has_llm_experience\": \"<boolean>\",\n      \"llm_evidence\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"ats\": {\n      \"score\": \"<integer>\",\n      \"breakdown\": {\n        \"keywords\": \"<integer>\",\n        \"structure\": \"<integer>\",\n        \"action_verbs\": \"<integer>\",\n        \"quantified_achievements\": \"<integer>\",\n        \"format\": \"<integer>\"\n      },\n      \"score_rationale\": \"<string>\",\n      \"issues\": [\n        {\n          \"category\": \"quantified_achievements\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        },\n        {\n          \"category\": \"contact_info\",\n          \"issue\": \"<string>\",\n          \"before\": \"<string>\",\n          \"after\": \"<string>\"\n        }\n      ]\n    },\n    \"summary\": \"<string>\",\n    \"strengths\": [\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      },\n      {\n        \"strength\": \"<string>\",\n        \"evidence\": \"<string>\"\n      }\n    ],\n    \"gaps\": [\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"MEDIUM\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"severity\": \"HIGH\",\n        \"market_reason\": \"<string>\",\n        \"time_to_close\": \"<string>\",\n        \"resource\": \"<string>\",\n        \"resource_url\": \"<string>\",\n        \"cost\": \"<string>\"\n      }\n    ],\n    \"confidence\": {\n      \"overall\": \"<number>\",\n      \"identity\": \"<number>\",\n      \"experience\": \"<number>\",\n      \"education\": \"<number>\",\n      \"ats\": \"<number>\",\n      \"ai_ml\": \"<number>\",\n      \"compensation\": \"<number>\"\n    },\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"github_url\": \"<string>\",\n    \"portfolio_url\": \"<string>\",\n    \"target_title\": \"<string>\",\n    \"experience_level\": \"Principal\",\n    \"seniority_ladder_position\": \"<string>\",\n    \"skill_clusters\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"years_total_evidence\": \"<string>\",\n    \"compensation\": {\n      \"current_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"annual\"\n      },\n      \"expected_ctc\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"period\": \"hourly\"\n      },\n      \"notice_period_days\": \"<integer>\",\n      \"evidence\": \"<string>\"\n    },\n    \"low_confidence_reasons\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
                             "cookie": [],
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "00369d51-c799-49b6-9503-6fd4e341695f",
+                            "id": "e2c0052a-3a4f-405b-86c7-b4e2ccae718f",
                             "name": "Invalid request body or parameters (e.g. malformed JSON, missing required field)",
                             "originalRequest": {
                                 "url": {
@@ -1317,7 +1317,7 @@
                                 "method": "PATCH",
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n  \"feed_preferences\": {\n    \"topics\": [\n      \"papers\",\n      \"papers\"\n    ],\n    \"domains\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_include\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_exclude\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"paused\": \"<boolean>\"\n  }\n}",
+                                    "raw": "{\n  \"feed_preferences\": {\n    \"topics\": [\n      \"models\",\n      \"benchmarks\"\n    ],\n    \"domains\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_include\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_exclude\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"paused\": \"<boolean>\"\n  }\n}",
                                     "options": {
                                         "raw": {
                                             "headerFamily": "json",
@@ -1339,7 +1339,7 @@
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "ce27e338-37f9-4b89-a56f-f0e579805320",
+                            "id": "45a624fe-bba9-4b9a-becd-7bd73d434421",
                             "name": "Resource does not exist or is not in this workspace",
                             "originalRequest": {
                                 "url": {
@@ -1375,7 +1375,7 @@
                                 "method": "PATCH",
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n  \"feed_preferences\": {\n    \"topics\": [\n      \"papers\",\n      \"papers\"\n    ],\n    \"domains\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_include\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_exclude\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"paused\": \"<boolean>\"\n  }\n}",
+                                    "raw": "{\n  \"feed_preferences\": {\n    \"topics\": [\n      \"models\",\n      \"benchmarks\"\n    ],\n    \"domains\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_include\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords_exclude\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"paused\": \"<boolean>\"\n  }\n}",
                                     "options": {
                                         "raw": {
                                             "headerFamily": "json",
@@ -1409,7 +1409,7 @@
             "description": "Job descriptions and AI-generated rubrics",
             "item": [
                 {
-                    "id": "d93eb7e8-b16f-4a7a-990c-8447a6b83d23",
+                    "id": "413fea82-75b5-432e-b08f-549a4c0c207b",
                     "name": "Upsert a job (auto-generates rubric if absent)",
                     "request": {
                         "name": "Upsert a job (auto-generates rubric if absent)",
@@ -1450,7 +1450,7 @@
                         "method": "POST",
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n  \"external_id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"level\": \"<string>\",\n  \"location\": {\n    \"eiusmod14\": 90621395\n  },\n  \"salary\": {\n    \"ut7e_\": -98226270.66733225,\n    \"commodo392\": -92183966.1461072\n  },\n  \"rubric\": {\n    \"competencies\": [\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  }\n}",
+                            "raw": "{\n  \"external_id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"level\": \"<string>\",\n  \"location\": {\n    \"Duise4f\": 89932499.10857841,\n    \"officia39d\": \"pariatur eiusmod elit adipisicing ea\",\n    \"veniam_fb\": true\n  },\n  \"salary\": {\n    \"enim_4\": false\n  },\n  \"rubric\": {\n    \"competencies\": [\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  }\n}",
                             "options": {
                                 "raw": {
                                     "headerFamily": "json",
@@ -1462,7 +1462,7 @@
                     },
                     "response": [
                         {
-                            "id": "d481a749-ecd4-4481-8329-c3d7656a584a",
+                            "id": "8d626e92-eb10-4189-82dc-be27c3bf61e0",
                             "name": "Upserted Job",
                             "originalRequest": {
                                 "url": {
@@ -1506,7 +1506,7 @@
                                 "method": "POST",
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n  \"external_id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"level\": \"<string>\",\n  \"location\": {\n    \"eiusmod14\": 90621395\n  },\n  \"salary\": {\n    \"ut7e_\": -98226270.66733225,\n    \"commodo392\": -92183966.1461072\n  },\n  \"rubric\": {\n    \"competencies\": [\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  }\n}",
+                                    "raw": "{\n  \"external_id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"level\": \"<string>\",\n  \"location\": {\n    \"Duise4f\": 89932499.10857841,\n    \"officia39d\": \"pariatur eiusmod elit adipisicing ea\",\n    \"veniam_fb\": true\n  },\n  \"salary\": {\n    \"enim_4\": false\n  },\n  \"rubric\": {\n    \"competencies\": [\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  }\n}",
                                     "options": {
                                         "raw": {
                                             "headerFamily": "json",
@@ -1523,7 +1523,7 @@
                                     "value": "application/json"
                                 }
                             ],
-                            "body": "{\n  \"id\": \"job_\",\n  \"workspace_id\": \"ws_\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rubric\": {\n    \"competencies\": [\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  \"created_at\": \"<dateTime>\",\n  \"external_id\": \"<string>\",\n  \"level\": \"<string>\",\n  \"location\": {\n    \"reprehenderit1ff\": 16568572.929857254,\n    \"nostrud_e\": \"dolore eu sit ullamco\",\n    \"eadf\": 68825387.81305265\n  },\n  \"salary\": {\n    \"consectetur_a28\": true,\n    \"nisi_c2\": false\n  }\n}",
+                            "body": "{\n  \"id\": \"job_\",\n  \"workspace_id\": \"ws_\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rubric\": {\n    \"competencies\": [\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  \"created_at\": \"<dateTime>\",\n  \"external_id\": \"<string>\",\n  \"level\": \"<string>\",\n  \"location\": {\n    \"aliqua4\": false,\n    \"dolored2\": 12284383\n  },\n  \"salary\": {\n    \"dolor8d\": 98472517,\n    \"ipsum_236\": \"ul\"\n  }\n}",
                             "cookie": [],
                             "_postman_previewlanguage": "json"
                         }
@@ -1534,7 +1534,7 @@
                     }
                 },
                 {
-                    "id": "3abe7993-5ab2-4c2a-99ff-e990cae440c5",
+                    "id": "b8634162-5954-4e9e-bc96-4290148e6ead",
                     "name": "List jobs (cursor-paginated)",
                     "request": {
                         "name": "List jobs (cursor-paginated)",
@@ -1581,7 +1581,7 @@
                     },
                     "response": [
                         {
-                            "id": "63f550f5-b7b8-4440-a066-fb2e245579ba",
+                            "id": "c49045d8-bc2c-4c0d-a26d-9db963daaece",
                             "name": "Page of Jobs",
                             "originalRequest": {
                                 "url": {
@@ -1639,7 +1639,7 @@
                                     "value": "application/json"
                                 }
                             ],
-                            "body": "{\n  \"items\": [\n    {\n      \"id\": \"job_\",\n      \"workspace_id\": \"ws_\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"rubric\": {\n        \"competencies\": [\n          {\n            \"name\": \"<string>\",\n            \"weight\": \"<number>\",\n            \"must_have\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nice_to_have\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"weight\": \"<number>\",\n            \"must_have\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nice_to_have\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ]\n      },\n      \"created_at\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"level\": \"<string>\",\n      \"location\": {\n        \"est_d76\": -68539036.44688715\n      },\n      \"salary\": {\n        \"sunt5e3\": false\n      }\n    },\n    {\n      \"id\": \"job_\",\n      \"workspace_id\": \"ws_\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"rubric\": {\n        \"competencies\": [\n          {\n            \"name\": \"<string>\",\n            \"weight\": \"<number>\",\n            \"must_have\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nice_to_have\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"weight\": \"<number>\",\n            \"must_have\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nice_to_have\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ]\n      },\n      \"created_at\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"level\": \"<string>\",\n      \"location\": {\n        \"in_1\": -4617842\n      },\n      \"salary\": {\n        \"et_a5\": 78377913.28237969,\n        \"pariatur_d81\": -47102003,\n        \"ametd2\": 74845874\n      }\n    }\n  ],\n  \"has_more\": \"<boolean>\",\n  \"next_cursor\": \"<string>\"\n}",
+                            "body": "{\n  \"items\": [\n    {\n      \"id\": \"job_\",\n      \"workspace_id\": \"ws_\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"rubric\": {\n        \"competencies\": [\n          {\n            \"name\": \"<string>\",\n            \"weight\": \"<number>\",\n            \"must_have\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nice_to_have\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"weight\": \"<number>\",\n            \"must_have\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nice_to_have\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ]\n      },\n      \"created_at\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"level\": \"<string>\",\n      \"location\": {\n        \"ad_0\": false\n      },\n      \"salary\": {\n        \"in15\": false\n      }\n    },\n    {\n      \"id\": \"job_\",\n      \"workspace_id\": \"ws_\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"rubric\": {\n        \"competencies\": [\n          {\n            \"name\": \"<string>\",\n            \"weight\": \"<number>\",\n            \"must_have\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nice_to_have\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"weight\": \"<number>\",\n            \"must_have\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nice_to_have\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ]\n      },\n      \"created_at\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"level\": \"<string>\",\n      \"location\": {\n        \"tempor_3\": -58189172\n      },\n      \"salary\": {\n        \"quis_b\": 14244051\n      }\n    }\n  ],\n  \"has_more\": \"<boolean>\",\n  \"next_cursor\": \"<string>\"\n}",
                             "cookie": [],
                             "_postman_previewlanguage": "json"
                         }
@@ -1650,7 +1650,7 @@
                     }
                 },
                 {
-                    "id": "e63db16e-0494-4461-b8c2-71ed4078249a",
+                    "id": "11119e0b-cd9a-43fc-b58a-993f1e9e2aff",
                     "name": "Get a job by id",
                     "request": {
                         "name": "Get a job by id",
@@ -1690,7 +1690,7 @@
                     },
                     "response": [
                         {
-                            "id": "2d51c2ef-aa15-42ab-a092-01beb1c0bf91",
+                            "id": "ed206a90-35e1-4720-8714-0e1e5ecf26ff",
                             "name": "Job",
                             "originalRequest": {
                                 "url": {
@@ -1730,12 +1730,12 @@
                                     "value": "application/json"
                                 }
                             ],
-                            "body": "{\n  \"id\": \"job_\",\n  \"workspace_id\": \"ws_\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rubric\": {\n    \"competencies\": [\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  \"created_at\": \"<dateTime>\",\n  \"external_id\": \"<string>\",\n  \"level\": \"<string>\",\n  \"location\": {\n    \"reprehenderit1ff\": 16568572.929857254,\n    \"nostrud_e\": \"dolore eu sit ullamco\",\n    \"eadf\": 68825387.81305265\n  },\n  \"salary\": {\n    \"consectetur_a28\": true,\n    \"nisi_c2\": false\n  }\n}",
+                            "body": "{\n  \"id\": \"job_\",\n  \"workspace_id\": \"ws_\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rubric\": {\n    \"competencies\": [\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"must_have\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"nice_to_have\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  \"created_at\": \"<dateTime>\",\n  \"external_id\": \"<string>\",\n  \"level\": \"<string>\",\n  \"location\": {\n    \"aliqua4\": false,\n    \"dolored2\": 12284383\n  },\n  \"salary\": {\n    \"dolor8d\": 98472517,\n    \"ipsum_236\": \"ul\"\n  }\n}",
                             "cookie": [],
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "2bda8fb2-fa5a-4f6d-b445-a6febd63fc5a",
+                            "id": "2fed4d1e-7b65-4ecc-b773-13afeca64190",
                             "name": "Resource does not exist or is not in this workspace",
                             "originalRequest": {
                                 "url": {
@@ -1786,7 +1786,7 @@
                     }
                 },
                 {
-                    "id": "6e39e624-13d8-492c-b044-c10ab4a9fd4e",
+                    "id": "8c3d384e-5852-4423-9697-2bfa82be9517",
                     "name": "Score a candidate against this job (5-dim with evidence)",
                     "request": {
                         "name": "Score a candidate against this job (5-dim with evidence)",
@@ -1852,7 +1852,7 @@
                     },
                     "response": [
                         {
-                            "id": "19df4ed1-f109-4847-a4f1-8ab08e2ce8ae",
+                            "id": "c730472f-7a0d-4a50-b0f3-1faac2d76ba4",
                             "name": "Match score",
                             "originalRequest": {
                                 "url": {
@@ -1915,7 +1915,7 @@
                                     "value": "application/json"
                                 }
                             ],
-                            "body": "{\n  \"overall\": \"<number>\",\n  \"dimensions\": {\n    \"skill_fit\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    },\n    \"level\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    },\n    \"location\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    },\n    \"salary\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    },\n    \"company_quality\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    }\n  },\n  \"recommendation\": \"yes\",\n  \"confidence\": \"<number>\"\n}",
+                            "body": "{\n  \"overall\": \"<number>\",\n  \"dimensions\": {\n    \"skill_fit\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    },\n    \"level\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    },\n    \"location\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    },\n    \"salary\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    },\n    \"company_quality\": {\n      \"score\": \"<number>\",\n      \"evidence\": [\n        \"<string>\"\n      ]\n    }\n  },\n  \"recommendation\": \"no\",\n  \"confidence\": \"<number>\"\n}",
                             "cookie": [],
                             "_postman_previewlanguage": "json"
                         }
@@ -1932,7 +1932,7 @@
             "description": "Candidate↔job pairings with optional match scores",
             "item": [
                 {
-                    "id": "dae4521a-1cc1-40dc-b678-8c83ccd7eb2f",
+                    "id": "f6e5e285-07d2-43bb-bea1-c51b6dc5dc4f",
                     "name": "Link a candidate to a job",
                     "request": {
                         "name": "Link a candidate to a job",
@@ -1982,7 +1982,7 @@
                     },
                     "response": [
                         {
-                            "id": "8cf6bd0d-8b41-4ccf-a3d9-78b6d3d6d375",
+                            "id": "ed59062c-ccfb-4cdd-8e09-eb9801ddc1f6",
                             "name": "Application",
                             "originalRequest": {
                                 "url": {
@@ -2043,7 +2043,7 @@
                                     "value": "application/json"
                                 }
                             ],
-                            "body": "{\n  \"id\": \"app_\",\n  \"workspace_id\": \"ws_\",\n  \"candidate_id\": \"cand_\",\n  \"job_id\": \"job_\",\n  \"stage\": \"applied\",\n  \"status\": \"hired\",\n  \"created_at\": \"<dateTime>\",\n  \"match_score\": {\n    \"overall\": \"<number>\",\n    \"dimensions\": {\n      \"skill_fit\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      },\n      \"level\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      },\n      \"location\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      },\n      \"salary\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      },\n      \"company_quality\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      }\n    },\n    \"recommendation\": \"no\",\n    \"confidence\": \"<number>\"\n  },\n  \"source\": \"<string>\"\n}",
+                            "body": "{\n  \"id\": \"app_\",\n  \"workspace_id\": \"ws_\",\n  \"candidate_id\": \"cand_\",\n  \"job_id\": \"job_\",\n  \"stage\": \"applied\",\n  \"status\": \"rejected\",\n  \"created_at\": \"<dateTime>\",\n  \"match_score\": {\n    \"overall\": \"<number>\",\n    \"dimensions\": {\n      \"skill_fit\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      },\n      \"level\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      },\n      \"location\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      },\n      \"salary\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      },\n      \"company_quality\": {\n        \"score\": \"<number>\",\n        \"evidence\": [\n          \"<string>\"\n        ]\n      }\n    },\n    \"recommendation\": \"strong_yes\",\n    \"confidence\": \"<number>\"\n  },\n  \"source\": \"<string>\"\n}",
                             "cookie": [],
                             "_postman_previewlanguage": "json"
                         }
@@ -2054,7 +2054,7 @@
                     }
                 },
                 {
-                    "id": "3442524e-8537-4e08-ba50-f0b05caf1f14",
+                    "id": "08d0f262-e8d3-4539-86e8-8a44544915e1",
                     "name": "List applications (cursor-paginated)",
                     "request": {
                         "name": "List applications (cursor-paginated)",
@@ -2101,7 +2101,7 @@
                     },
                     "response": [
                         {
-                            "id": "4afb5f88-b14b-4c58-a35d-37cbb877afff",
+                            "id": "e65e626a-48de-4cdb-a346-329080279828",
                             "name": "Page of Applications",
                             "originalRequest": {
                                 "url": {
@@ -2159,7 +2159,7 @@
                                     "value": "application/json"
                                 }
                             ],
-                            "body": "{\n  \"items\": [\n    {\n      \"id\": \"app_\",\n      \"workspace_id\": \"ws_\",\n      \"candidate_id\": \"cand_\",\n      \"job_id\": \"job_\",\n      \"stage\": \"applied\",\n      \"status\": \"rejected\",\n      \"created_at\": \"<dateTime>\",\n      \"match_score\": {\n        \"overall\": \"<number>\",\n        \"dimensions\": {\n          \"skill_fit\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"level\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"location\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"salary\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"company_quality\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          }\n        },\n        \"recommendation\": \"strong_no\",\n        \"confidence\": \"<number>\"\n      },\n      \"source\": \"<string>\"\n    },\n    {\n      \"id\": \"app_\",\n      \"workspace_id\": \"ws_\",\n      \"candidate_id\": \"cand_\",\n      \"job_id\": \"job_\",\n      \"stage\": \"applied\",\n      \"status\": \"active\",\n      \"created_at\": \"<dateTime>\",\n      \"match_score\": {\n        \"overall\": \"<number>\",\n        \"dimensions\": {\n          \"skill_fit\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"level\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"location\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"salary\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"company_quality\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          }\n        },\n        \"recommendation\": \"strong_no\",\n        \"confidence\": \"<number>\"\n      },\n      \"source\": \"<string>\"\n    }\n  ],\n  \"has_more\": \"<boolean>\",\n  \"next_cursor\": \"<string>\"\n}",
+                            "body": "{\n  \"items\": [\n    {\n      \"id\": \"app_\",\n      \"workspace_id\": \"ws_\",\n      \"candidate_id\": \"cand_\",\n      \"job_id\": \"job_\",\n      \"stage\": \"applied\",\n      \"status\": \"active\",\n      \"created_at\": \"<dateTime>\",\n      \"match_score\": {\n        \"overall\": \"<number>\",\n        \"dimensions\": {\n          \"skill_fit\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"level\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"location\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"salary\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"company_quality\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          }\n        },\n        \"recommendation\": \"yes\",\n        \"confidence\": \"<number>\"\n      },\n      \"source\": \"<string>\"\n    },\n    {\n      \"id\": \"app_\",\n      \"workspace_id\": \"ws_\",\n      \"candidate_id\": \"cand_\",\n      \"job_id\": \"job_\",\n      \"stage\": \"applied\",\n      \"status\": \"rejected\",\n      \"created_at\": \"<dateTime>\",\n      \"match_score\": {\n        \"overall\": \"<number>\",\n        \"dimensions\": {\n          \"skill_fit\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"level\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"location\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"salary\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          },\n          \"company_quality\": {\n            \"score\": \"<number>\",\n            \"evidence\": [\n              \"<string>\"\n            ]\n          }\n        },\n        \"recommendation\": \"no\",\n        \"confidence\": \"<number>\"\n      },\n      \"source\": \"<string>\"\n    }\n  ],\n  \"has_more\": \"<boolean>\",\n  \"next_cursor\": \"<string>\"\n}",
                             "cookie": [],
                             "_postman_previewlanguage": "json"
                         }
@@ -2176,7 +2176,7 @@
             "description": "Your own usage, costs, and per-request audit log",
             "item": [
                 {
-                    "id": "030a0d62-131b-4cca-a3a5-16cc00161791",
+                    "id": "36a36d98-61aa-4003-b686-fd102ef4f873",
                     "name": "Aggregated usage over a time window",
                     "request": {
                         "name": "Aggregated usage over a time window",
@@ -2218,7 +2218,7 @@
                     },
                     "response": [
                         {
-                            "id": "4eb316f0-5ac5-4359-b95f-e583667e35ae",
+                            "id": "9b328b70-8a3c-4ae1-89f8-2f8e7f18ac83",
                             "name": "Usage summary",
                             "originalRequest": {
                                 "url": {
@@ -2268,7 +2268,7 @@
                                     "value": "application/json"
                                 }
                             ],
-                            "body": "{\n  \"window_days\": \"<integer>\",\n  \"workspace_id\": \"ws_\",\n  \"totals\": {\n    \"calls\": \"<integer>\",\n    \"cost_usd\": \"<number>\",\n    \"tokens_in\": \"<integer>\",\n    \"tokens_out\": \"<integer>\",\n    \"errors\": \"<integer>\",\n    \"error_rate\": \"<number>\"\n  },\n  \"by_endpoint\": [\n    {\n      \"endpoint\": \"<string>\",\n      \"calls\": \"<integer>\",\n      \"cost_usd\": \"<number>\",\n      \"errors\": \"<integer>\",\n      \"avg_latency_ms\": \"<integer>\"\n    },\n    {\n      \"endpoint\": \"<string>\",\n      \"calls\": \"<integer>\",\n      \"cost_usd\": \"<number>\",\n      \"errors\": \"<integer>\",\n      \"avg_latency_ms\": \"<integer>\"\n    }\n  ],\n  \"by_day\": [\n    {\n      \"day\": \"<date>\",\n      \"calls\": \"<integer>\",\n      \"cost_usd\": \"<number>\",\n      \"errors\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"calls\": \"<integer>\",\n      \"cost_usd\": \"<number>\",\n      \"errors\": \"<integer>\"\n    }\n  ],\n  \"by_status\": [\n    {\n      \"bucket\": \"2xx\",\n      \"count\": \"<integer>\"\n    },\n    {\n      \"bucket\": \"5xx\",\n      \"count\": \"<integer>\"\n    }\n  ]\n}",
+                            "body": "{\n  \"window_days\": \"<integer>\",\n  \"workspace_id\": \"ws_\",\n  \"totals\": {\n    \"calls\": \"<integer>\",\n    \"cost_usd\": \"<number>\",\n    \"tokens_in\": \"<integer>\",\n    \"tokens_out\": \"<integer>\",\n    \"errors\": \"<integer>\",\n    \"error_rate\": \"<number>\"\n  },\n  \"by_endpoint\": [\n    {\n      \"endpoint\": \"<string>\",\n      \"calls\": \"<integer>\",\n      \"cost_usd\": \"<number>\",\n      \"errors\": \"<integer>\",\n      \"avg_latency_ms\": \"<integer>\"\n    },\n    {\n      \"endpoint\": \"<string>\",\n      \"calls\": \"<integer>\",\n      \"cost_usd\": \"<number>\",\n      \"errors\": \"<integer>\",\n      \"avg_latency_ms\": \"<integer>\"\n    }\n  ],\n  \"by_day\": [\n    {\n      \"day\": \"<date>\",\n      \"calls\": \"<integer>\",\n      \"cost_usd\": \"<number>\",\n      \"errors\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"calls\": \"<integer>\",\n      \"cost_usd\": \"<number>\",\n      \"errors\": \"<integer>\"\n    }\n  ],\n  \"by_status\": [\n    {\n      \"bucket\": \"5xx\",\n      \"count\": \"<integer>\"\n    },\n    {\n      \"bucket\": \"3xx\",\n      \"count\": \"<integer>\"\n    }\n  ]\n}",
                             "cookie": [],
                             "_postman_previewlanguage": "json"
                         }
@@ -2279,7 +2279,7 @@
                     }
                 },
                 {
-                    "id": "c939c496-682e-4036-ace8-a8b3aa96d68f",
+                    "id": "5ad7d24a-b3ba-4ce2-8317-1dae4c5be10f",
                     "name": "Last N requests for self-debug",
                     "request": {
                         "name": "Last N requests for self-debug",
@@ -2339,7 +2339,7 @@
                     },
                     "response": [
                         {
-                            "id": "f0995ab4-838b-4e00-ae98-adc10282b6e7",
+                            "id": "f2eaff43-51e8-442b-abee-113270feb831",
                             "name": "Recent requests",
                             "originalRequest": {
                                 "url": {
@@ -2424,7 +2424,7 @@
             "description": "Personalized AI/ML news feed per candidate",
             "item": [
                 {
-                    "id": "c8e9cf24-81b7-40a2-94f2-0c4daa79062f",
+                    "id": "ae69ab61-ae8a-4d54-8262-b718d07ae770",
                     "name": "Personalized AI/ML news feed for one candidate",
                     "request": {
                         "name": "Personalized AI/ML news feed for one candidate",
@@ -2468,7 +2468,7 @@
                                         "type": "text/plain"
                                     },
                                     "key": "topic",
-                                    "value": "benchmarks"
+                                    "value": "tools"
                                 }
                             ],
                             "variable": [
@@ -2496,7 +2496,7 @@
                     },
                     "response": [
                         {
-                            "id": "362943e9-ac3c-4e69-b3f5-ce83e4067cb2",
+                            "id": "0b042b1f-6df5-4ac6-811d-7006ed627523",
                             "name": "Ranked feed page",
                             "originalRequest": {
                                 "url": {
@@ -2535,7 +2535,7 @@
                                                 "type": "text/plain"
                                             },
                                             "key": "topic",
-                                            "value": "benchmarks"
+                                            "value": "tools"
                                         }
                                     ],
                                     "variable": []
@@ -2565,12 +2565,12 @@
                                     "value": "application/json"
                                 }
                             ],
-                            "body": "{\n  \"candidate_id\": \"cand_\",\n  \"count\": \"<integer>\",\n  \"has_more\": \"<boolean>\",\n  \"items\": [\n    {\n      \"id\": \"<string>\",\n      \"source\": \"hn\",\n      \"url\": \"<uri>\",\n      \"title\": \"<string>\",\n      \"topics\": [\n        \"tools\",\n        \"models\"\n      ],\n      \"keywords\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"published_at\": \"<dateTime>\",\n      \"relevance\": \"<number>\",\n      \"summary\": \"<string>\",\n      \"meta\": {\n        \"elit7_\": 14493366.223173782\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"hn\",\n      \"url\": \"<uri>\",\n      \"title\": \"<string>\",\n      \"topics\": [\n        \"models\",\n        \"benchmarks\"\n      ],\n      \"keywords\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"published_at\": \"<dateTime>\",\n      \"relevance\": \"<number>\",\n      \"summary\": \"<string>\",\n      \"meta\": {\n        \"dolorac4\": true\n      }\n    }\n  ],\n  \"next_cursor\": \"<dateTime>\",\n  \"paused\": \"<boolean>\",\n  \"personalisation\": {\n    \"topics\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"domains\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"experience_level\": \"<string>\",\n    \"years_total\": \"<number>\"\n  }\n}",
+                            "body": "{\n  \"candidate_id\": \"cand_\",\n  \"count\": \"<integer>\",\n  \"has_more\": \"<boolean>\",\n  \"items\": [\n    {\n      \"id\": \"<string>\",\n      \"source\": \"leaderboard\",\n      \"url\": \"<uri>\",\n      \"title\": \"<string>\",\n      \"topics\": [\n        \"papers\",\n        \"benchmarks\"\n      ],\n      \"keywords\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"published_at\": \"<dateTime>\",\n      \"relevance\": \"<number>\",\n      \"summary\": \"<string>\",\n      \"image_url\": \"<string>\",\n      \"meta\": {\n        \"consequat_40\": -93624892.59043571\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"source\": \"hf_models\",\n      \"url\": \"<uri>\",\n      \"title\": \"<string>\",\n      \"topics\": [\n        \"models\",\n        \"tools\"\n      ],\n      \"keywords\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"published_at\": \"<dateTime>\",\n      \"relevance\": \"<number>\",\n      \"summary\": \"<string>\",\n      \"image_url\": \"<string>\",\n      \"meta\": {\n        \"dolored\": true,\n        \"mollitc3\": true\n      }\n    }\n  ],\n  \"next_cursor\": \"<dateTime>\",\n  \"paused\": \"<boolean>\",\n  \"personalisation\": {\n    \"topics\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"domains\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"experience_level\": \"<string>\",\n    \"years_total\": \"<number>\"\n  }\n}",
                             "cookie": [],
                             "_postman_previewlanguage": "json"
                         },
                         {
-                            "id": "9a839c1a-c579-48b9-a150-e0bd3d705c22",
+                            "id": "cc9e428e-df1c-4573-9379-0838ea1b5a8e",
                             "name": "Resource does not exist or is not in this workspace",
                             "originalRequest": {
                                 "url": {
@@ -2609,7 +2609,7 @@
                                                 "type": "text/plain"
                                             },
                                             "key": "topic",
-                                            "value": "benchmarks"
+                                            "value": "tools"
                                         }
                                     ],
                                     "variable": []
@@ -2670,7 +2670,7 @@
         }
     ],
     "info": {
-        "_postman_id": "d884b514-2d52-46a1-948f-60a9c56f8342",
+        "_postman_id": "4ec7167a-f474-48a6-ae8e-668b57b2d65d",
         "name": "AIWire Platform API",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
         "description": {
