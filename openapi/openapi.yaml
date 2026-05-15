@@ -193,6 +193,40 @@ paths:
         "400": { $ref: "#/components/responses/BadRequest" }
         "404": { $ref: "#/components/responses/NotFound" }
 
+  /v1/feed/recommend:
+    post:
+      tags: [Feed]
+      summary: Stateless personalised feed (no candidate record required)
+      operationId: recommendFeed
+      description: |
+        Returns a ranked AI/ML news feed personalised by the signals in
+        the request body. We do **not** persist any part of the body — no
+        candidate is created, no PII is stored. Designed for serving a
+        feed to every developer on your platform without uploading their
+        profiles to us.
+
+        Pass as little or as much as you want:
+        - `preferences.topics` only → topic-filtered feed
+        - `profile.ai_ml.domain_specializations` → domain-aligned
+        - Full profile + preferences → maximum personalisation
+        - Empty body → recency-only feed
+
+        Same item shape, same ranking formula, same `image_url`
+        thumbnails as the candidate-scoped endpoint.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/FeedRecommendInput" }
+      responses:
+        "200":
+          description: Ranked feed page (no candidate_id echo, since none was given)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FeedResponse" }
+        "400": { $ref: "#/components/responses/BadRequest" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+
   /v1/candidates/{id}/feed:
     get:
       tags: [Feed]
@@ -855,6 +889,28 @@ components:
               request_id: { type: string, pattern: "^req_", nullable: true }
 
     # ─── Feed ────────────────────────────────────────────────────────────
+    FeedRecommendInput:
+      type: object
+      description: |
+        Inline signals for the stateless feed endpoint. Every field is
+        optional — pass only what you have. Nothing is persisted.
+      properties:
+        profile:
+          type: object
+          description: Subset of the parser Profile that the ranker uses.
+          properties:
+            skills: { type: array, items: { type: string } }
+            ai_ml:
+              type: object
+              properties:
+                domain_specializations: { type: array, items: { type: string } }
+            experience_level: { type: string }
+            years_total: { type: number }
+        preferences: { $ref: "#/components/schemas/FeedPreferences" }
+        limit:    { type: integer, minimum: 1, maximum: 50, default: 20 }
+        cursor:   { type: string, format: date-time, description: "ISO timestamp for pagination" }
+        topic:    { type: string, enum: [papers, tools, models, benchmarks], description: "Hard filter" }
+
     FeedPreferences:
       type: object
       description: |

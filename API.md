@@ -319,6 +319,45 @@ cs.AI / cs.CV), HuggingFace Daily Papers, trending HuggingFace models,
 HackerNews AI tool stories, and the Open LLM Leaderboard. No LLM call
 per request — ranking is deterministic + cheap.
 
+### `POST /v1/feed/recommend` — stateless
+
+Same ranked feed, but with the personalisation signals passed inline.
+**We do not persist any part of the request body.** Use this when you
+want to serve a feed to every user on your platform without creating
+candidate records (no PII upload, no data duplication).
+
+```bash
+curl -X POST https://aiwire-api.aiwire.workers.dev/v1/feed/recommend \
+  -H "Authorization: Bearer $AIWIRE_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "profile": {
+      "skills": ["pytorch", "rag", "vllm"],
+      "ai_ml": { "domain_specializations": ["nlp", "genai/llms"] },
+      "experience_level": "Senior",
+      "years_total": 6
+    },
+    "preferences": {
+      "topics": ["papers", "models"],
+      "keywords_exclude": ["computer vision"]
+    },
+    "limit": 20
+  }'
+```
+
+Every body field is **optional**. Pass as little or as much as you have:
+
+| Body | Result |
+|---|---|
+| `{}` | Recency-only feed across all sources |
+| `{"preferences": {"topics": ["papers"]}}` | Papers boosted to the top |
+| `{"profile": {"ai_ml": {"domain_specializations": ["nlp"]}}}` | NLP-aligned items boosted |
+| Full body (above) | Maximum personalisation |
+
+Response is identical to the candidate-scoped endpoint **minus** the
+`candidate_id` field (since none was provided). `personalisation` still
+echoes back what the ranker actually used so you can debug.
+
 ### `GET /v1/candidates/{id}/feed`
 
 ```bash

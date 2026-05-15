@@ -39,11 +39,15 @@ idempotent CRUD with cursor pagination. Free.
 **Self-monitoring.** `/v1/usage/summary` for cost / error / latency
 aggregates. `/v1/usage/recent` for the per-request audit log. Free.
 
-**Personalised news feed.** `GET /v1/candidates/{id}/feed` returns a
-ranked stream of LLM papers (arxiv + HF Daily Papers), new open-source
-models (HuggingFace), AI tools / launches (HN), and LLM benchmarks
-(Open LLM Leaderboard). Personalisation is driven by the candidate's
-resume signals + explicit `feed_preferences` (`PATCH /v1/candidates/{id}`).
+**Personalised news feed.** Ranked stream of LLM papers (arxiv + HF
+Daily Papers), new open-source models (HuggingFace), AI tools / launches
+(HN), and LLM benchmarks (Open LLM Leaderboard). Two ways to call:
+- `GET /v1/candidates/{id}/feed` — for stored candidates, uses their
+  resume signals + `feed_preferences`.
+- `POST /v1/feed/recommend` — **stateless**. Send personalisation signals
+  in the body; we persist nothing, you never have to upload user PII to
+  us. Same response shape.
+
 Free. Cron-pulled cache, no per-call LLM cost.
 
 **Baked in.** Bias firewall (no age / gender / caste / marital / etc.),
@@ -115,7 +119,8 @@ or Python.
 | `GET` | [`/v1/applications`](API.md#applications) | List applications |
 | `GET` | [`/v1/usage/summary`](API.md#usage) | Aggregated usage |
 | `GET` | [`/v1/usage/recent`](API.md#usage) | Per-request audit log |
-| `GET` | [`/v1/candidates/{id}/feed`](API.md#news-feed) | Personalised AI/ML news feed |
+| `GET` | [`/v1/candidates/{id}/feed`](API.md#news-feed) | Personalised feed for a stored candidate |
+| `POST` | [`/v1/feed/recommend`](API.md#news-feed) | Stateless feed — signals in body, nothing persisted |
 | `PATCH` | [`/v1/candidates/{id}`](API.md#candidates) | Update feed preferences |
 
 ---
