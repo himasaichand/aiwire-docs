@@ -6,7 +6,7 @@ see [`openapi/openapi.yaml`](openapi/openapi.yaml).
 **Base URL:** `https://aiwire-api.aiwire.workers.dev`
 **Auth:** `Authorization: Bearer sk_live_<your-key>` on every `/v1/*` call.
 
-> **First time here?** Read the [**Concepts section in the README**](README.md#concepts-1-min-read) first — it defines *rubric*, *competency*, *the 5 match dimensions*, *ATS score*, *evidence quote*, and *stateless vs. stateful* in plain English. This file assumes you know that vocabulary.
+> **First time here?** Read [**CONCEPTS.md**](CONCEPTS.md) first — it defines *rubric*, *competency*, *the 5 match dimensions*, *ATS score*, *evidence quote*, and *stateless vs. stateful* in plain English. This file assumes you know that vocabulary.
 
 For auth, errors, rate limits, idempotency, pagination, IDs, and
 versioning — see [the README](README.md). This file is endpoint
