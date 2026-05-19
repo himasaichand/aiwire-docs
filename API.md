@@ -127,7 +127,7 @@ The `profile` object has ~30 fields. Highlights:
 - `experience_level`: `Junior | Mid | Senior | Lead | Principal | Director`
 - `ai_ml.domain_specializations[*]`: `NLP | Computer Vision | Recommendations | Reinforcement Learning | MLOps | GenAI/LLMs | Speech | Time Series | Tabular ML | Robotics | Search/Retrieval | Fraud/Anomaly | Edge/On-device`
 - `education[*].institution_tier`: `tier_1 | tier_2 | tier_3 | unranked` (India-aware: IIT/IISc/IIIT-H/BITS/IIM-A-B-C = tier_1; NITs/other-IIITs = tier_2)
-- `gaps[*].severity`: `CRITICAL | HIGH | MEDIUM`
+- `gaps[*].severity`: `CRITICAL | HIGH | MEDIUM | LOW`
 
 ---
 
