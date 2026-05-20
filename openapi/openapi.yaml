@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.0.3
 info:
   title: AIWire Platform API
   version: 1.0.0
@@ -798,9 +798,9 @@ components:
         stage: { type: string, default: applied }
         status: { type: string, enum: [active, hired, rejected] }
         match_score:
-          oneOf:
+          description: The computed match score when present; null or absent otherwise.
+          allOf:
             - $ref: "#/components/schemas/MatchScore"
-            - { type: "null" }
         source: { type: string, nullable: true }
         created_at: { type: string, format: date-time }
 
@@ -926,6 +926,8 @@ components:
               endpoint: { type: string }
               calls: { type: integer }
               cost_usd: { type: number }
+              tokens_in: { type: integer }
+              tokens_out: { type: integer }
               errors: { type: integer }
               avg_latency_ms: { type: integer }
               p50_latency_ms: { type: integer }
@@ -1105,9 +1107,15 @@ components:
 
     FeedResponse:
       type: object
-      required: [candidate_id, count, has_more, items]
+      required: [count, has_more, items]
       properties:
-        candidate_id: { type: string, pattern: "^cand_" }
+        candidate_id:
+          type: string
+          pattern: "^cand_"
+          description: >
+            Present only on the candidate-scoped endpoint
+            (GET /v1/candidates/{id}/feed). The stateless
+            POST /v1/recommendations omits it, since no candidate was given.
         count: { type: integer }
         has_more: { type: boolean }
         next_cursor: { type: string, format: date-time, nullable: true }
