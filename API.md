@@ -423,7 +423,7 @@ want to serve a feed to every user on your platform without creating
 candidate records (no PII upload, no data duplication).
 
 ```bash
-curl -X POST https://aiwire-api.aiwire.workers.dev/v1/feed/recommend \
+curl -X POST https://aiwire-api.aiwire.workers.dev/v1/recommendations \
   -H "Authorization: Bearer $AIWIRE_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -538,6 +538,17 @@ relevance =
 
 Items with negative relevance are filtered out. Final sort: relevance DESC,
 then `published_at` DESC.
+
+**Source diversification.** When no explicit `topic` filter is set, no single
+source may exceed ~35% of a page. This stops a high-frequency source (trending
+models refresh hourly; papers every 6h) from monopolising the feed when you
+haven't expressed a preference. If you *do* pass `topic=models`, that's an
+explicit request for one slice and the cap does not apply.
+
+**Every item has a `summary`.** Papers and arXiv carry their real abstract;
+models carry their task + tags; Hacker News items carry the linked article's
+`og:description` (extracted at ingest, no LLM); leaderboard items carry their
+benchmark scores. You never have to synthesize a description client-side.
 
 ### How personalisation is derived
 
