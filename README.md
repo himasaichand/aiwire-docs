@@ -199,9 +199,11 @@ your most recent failures with status codes, latency, and the
 + same body → cached response (24h). Same key + different body →
 `409 idempotency_key_mismatch`.
 
-**Rate limit.** 100 requests / minute / key. On `429` you get
-`Retry-After: <seconds>` plus `RateLimit-Remaining` and `RateLimit-Reset`
-headers. Email us if you need a higher limit.
+**Rate limit.** 100 requests / minute / key. **Every** response carries
+`RateLimit-Limit: 100` and `RateLimit-Policy: 100;w=60` so you can see the
+budget and self-throttle. On `429` you also get `Retry-After: 60`,
+`RateLimit-Remaining: 0`, and `RateLimit-Reset: 60`. Email us if you need a
+higher limit.
 
 **Pagination.** All list endpoints use cursor pagination:
 

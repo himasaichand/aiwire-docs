@@ -909,6 +909,15 @@ components:
             tokens_out: { type: integer }
             errors: { type: integer }
             error_rate: { type: number, minimum: 0, maximum: 1 }
+        latency_ms:
+          type: object
+          description: Overall latency percentiles (ms) across all endpoints in the window.
+          properties:
+            avg: { type: integer }
+            p50: { type: integer }
+            p95: { type: integer }
+            p99: { type: integer }
+            max: { type: integer }
         by_endpoint:
           type: array
           items:
@@ -919,6 +928,9 @@ components:
               cost_usd: { type: number }
               errors: { type: integer }
               avg_latency_ms: { type: integer }
+              p50_latency_ms: { type: integer }
+              p95_latency_ms: { type: integer }
+              p99_latency_ms: { type: integer }
         by_day:
           type: array
           items:
@@ -1192,16 +1204,21 @@ components:
         application/problem+json:
           schema: { $ref: "#/components/schemas/Problem" }
     RateLimited:
-      description: Rate limit exceeded (100 req/min/key)
+      description: >
+        Rate limit exceeded (100 req/min/key). Note: RateLimit-Limit and
+        RateLimit-Policy are returned on EVERY response (not just 429) so
+        clients can self-throttle.
       headers:
         Retry-After:
-          schema: { type: integer }
+          schema: { type: integer, description: "Seconds to wait before retrying" }
         RateLimit-Limit:
           schema: { type: integer }
+        RateLimit-Policy:
+          schema: { type: string, description: "e.g. \"100;w=60\" — limit;window-seconds" }
         RateLimit-Remaining:
           schema: { type: integer }
         RateLimit-Reset:
-          schema: { type: integer, description: "Unix seconds" }
+          schema: { type: integer, description: "Seconds until the window resets" }
       content:
         application/problem+json:
           schema: { $ref: "#/components/schemas/Problem" }

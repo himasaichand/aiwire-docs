@@ -611,11 +611,16 @@ curl -H "Authorization: Bearer $AIWIRE_KEY" \
     "tokens_in": 187204, "tokens_out": 84310,
     "errors": 3, "error_rate": 0.0128
   },
+  "latency_ms": {
+    "avg": 4120, "p50": 3380, "p95": 19880, "p99": 22140, "max": 31002
+  },
   "by_endpoint": [
     {
       "endpoint": "v1.resumes.parse",
       "calls": 12, "cost_usd": 0.137,
-      "errors": 1, "avg_latency_ms": 19822
+      "errors": 1,
+      "avg_latency_ms": 19822, "p50_latency_ms": 18900,
+      "p95_latency_ms": 24010, "p99_latency_ms": 25600
     }
   ],
   "by_day": [
@@ -627,6 +632,12 @@ curl -H "Authorization: Bearer $AIWIRE_KEY" \
   ]
 }
 ```
+
+**Latency.** `latency_ms` gives overall percentiles across all endpoints;
+each `by_endpoint` row carries its own `p50/p95/p99`. Monitor **p95/p99**
+for SLOs — averages hide tail latency (resume parse is LLM-backed and can
+spike to ~20s). Older rows logged before latency capture are excluded from
+percentile math.
 
 ### `GET /v1/usage/recent`
 
