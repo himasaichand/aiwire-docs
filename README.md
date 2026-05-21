@@ -236,15 +236,39 @@ If you want any of these sooner, tell us.
 
 Pay per call, no monthly minimum during pilot.
 
-| Endpoint | Cost |
-|---|---|
-| `POST /v1/resumes/parse` | ~$0.012 |
-| `POST /v1/jobs` (with auto-rubric) | ~$0.005 |
-| `POST /v1/jobs/{id}/match` | ~$0.005 |
-| Everything else (lists, gets, applications, usage) | Free |
+| Endpoint | Cost | Why |
+|---|---|---|
+| `POST /v1/resumes/parse` | ~$0.012 | LLM (Claude) call |
+| `POST /v1/rubrics` | ~$0.005 | LLM call |
+| `POST /v1/jobs` (with auto-rubric) | ~$0.005 | LLM call |
+| `POST /v1/jobs/{id}/match` | ~$0.005 | LLM call |
+| `POST /v1/match_scores` | ~$0.005 | LLM call |
+| `POST /v1/recommendations`, `GET …/feed` | Free | Cron-cached, no LLM per request |
+| Lists, gets, applications, usage | Free | No LLM |
 
 Authoritative number is whatever `/v1/usage/summary` returns for the
 billing month.
+
+> ### ⚠️ Please use the LLM-backed calls sparingly
+>
+> The five **LLM-backed** endpoints above (parse, rubrics, match, auto-rubric
+> jobs) each make a real Claude call and **consume credits per request** —
+> the lists, feed, and usage endpoints are free. During the pilot, a few
+> habits keep costs predictable:
+>
+> - **Cache results on your side.** A parsed profile, a generated rubric, and
+>   a match score don't change unless the input changes — store them and reuse
+>   rather than re-calling.
+> - **Don't re-parse the same resume.** Parse once, persist the `profile`
+>   (or store it in your own DB), and reference it afterward.
+> - **Reuse rubrics.** Generate a job's rubric once; pass it back into
+>   `/v1/match_scores` for every candidate instead of regenerating it.
+> - **Batch deliberately, not in tight loops.** Avoid firing hundreds of
+>   parse/match calls in a burst — spread them out and watch the meter.
+> - **Watch your spend** in real time via `GET /v1/usage/summary?days=1`
+>   (`totals.cost_usd`). Set yourself an internal threshold.
+>
+> Free endpoints (feed, lists, usage) you can call as often as you like.
 
 ---
 
